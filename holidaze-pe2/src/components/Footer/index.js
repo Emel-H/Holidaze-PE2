@@ -1,14 +1,13 @@
 import React from "react";
-import Button from 'react-bootstrap/Button';
 
 function Footer() {
     return (
-      <footer className="bg-dark text-info">
+      <footer className="bg-light text-info">
         <p className="mt-2">Follow us:</p>
         <p>
-            <Button className="mx-1" variant="light"><a href="https://www.facebook.com" >FB</a></Button>
-            <Button className="mx-1" variant="light"><a href="https://www.twitter.com" >TW</a></Button>
-            <Button className="mx-1" variant="light"><a href="https://www.instagram.com" >IG</a></Button>
+            <a className="btn btn-dark mx-1" href="https://www.facebook.com" ><i className="bi bi-facebook text-white"></i></a>
+            <a className="btn btn-dark mx-1" href="https://www.twitter.com" ><i className="bi bi-twitter text-white"></i></a>
+            <a className="btn btn-dark mx-1" href="https://www.instagram.com" ><i className="bi bi-instagram text-white"></i></a>
         </p>
         <p>&copy;2024 Holidaze Ltd</p>
       </footer>
