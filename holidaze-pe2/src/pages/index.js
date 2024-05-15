@@ -9,7 +9,7 @@ function Home() {
     
     return (
         <main>
-            <h1 className="text-info pt-5 mt-5"> eCOM</h1>
+            <h1 className="text-info pt-5 mt-5"> Welcome to Holidaze</h1>
             <h2>Your primary destination for great deals</h2>
             <Container>
                 <Row>
