@@ -44,7 +44,7 @@ function Login() {
                 <div className="col-2"></div>
                 <div className="col-sm-8">
                     <h1 className="text-center mt-5">Welcome to Holidaze</h1>
-                    <p className="text-center mt-1 mb-4" id="userFeedback">
+                    <p className="text-center mt-1 mb-4">
                     Enter login details below
                     </p>
                     <form onSubmit={LoginUser} className="border border-dark rounded" >
@@ -52,7 +52,7 @@ function Login() {
                             <label>User Name (Email address)</label>
                             <input
                             type="email"
-                            className="form-control form-control"
+                            className="form-control"
                             required
                             name="InputEmail"
                             aria-describedby="email"
@@ -66,7 +66,7 @@ function Login() {
                             <label>Password</label>
                             <input
                             type="password"
-                            className="form-control form-control"
+                            className="form-control"
                             minLength="8"
                             required
                             name="InputPassword"

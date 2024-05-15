@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {Form, Card, Container, Row, Spinner } from 'react-bootstrap';
  
-const url = 'https://v2.api.noroff.dev/online-shop';
+const url = "https://v2.api.noroff.dev/holidaze/venues?page=";
 
-function GetProducts(search){
-    let [products, setProducts] = useState([]);
+function GetVenues(search){
+    
+    let [venues, setVenues] = useState([]);
     // State for holding our loading state
     const [isLoading, setIsLoading] = useState(true);
     // State for holding our error state
@@ -19,10 +20,23 @@ function GetProducts(search){
                 setIsError(false);
                 // Turn on the loading state each time we do an API call
                 setIsLoading(true);
-                const response = await fetch(url);
-                const json = await response.json();
-                // Setting our `products` state to the API data we received
-                setProducts(json.data);
+                let page = 1;
+                let morePages = true;
+                let allVenues=[];
+                while(morePages){
+                    const response = await fetch(url+page.toString());
+                    const json = await response.json();
+                    allVenues.push(...json.data);
+                    if(json.meta.pageCount>page){
+                        page++;
+                    }
+                    else{
+                        morePages=false;
+                    }
+                }
+                
+                // Setting our `venues` state to the API data we received
+                setVenues(allVenues);
                 // Clear the loading state once we've successfully got our data
                 setIsLoading(false);
             } catch (error) {
@@ -39,52 +53,55 @@ function GetProducts(search){
         return <Spinner animation="border" role="status"></Spinner>;
     }
     else if (isError){
-        return <h2>Error loading data</h2>;
+        return <h2>Error loading data from our servers</h2>;
     }
     else{
-        
-        if(products.length >1){
-            const pop = (products.filter((product) => product.title.toLowerCase().includes(search.toLowerCase())||product.description.toLowerCase().includes(search.toLowerCase())));
-            return pop.map((product) => ( 
-                <Card key={product.id} className="m-3" style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={product.image.url} />
-                    <Card.Body>
-                        <Card.Title>{product.title}</Card.Title>
-                        <Card.Text> {product.description} </Card.Text>
-                        <Card.Text> {product.price===product.discountedPrice ? product.discountedPrice+"$" : product.discountedPrice+"$ discounted:"+ (Math.round((product.discountedPrice-product.price))) +"$ "} </Card.Text>
-                        <Link className="btn btn-info" to={`/venue/${product.id}`}>View</Link>
-                    </Card.Body>
-                </Card>
-         ));
-        }
-        else{
-            return <h2> No match to your search, try something else </h2>;
-        }
-        
+        return PopulateVenues(venues, search); 
     }
     
+}
+
+function PopulateVenues(venues, search){
+    const pop = (venues.filter((venue) => venue.name.toLowerCase().includes(search.toLowerCase())||venue.description.toLowerCase().includes(search.toLowerCase())));
+    if(pop.length>1){
+        return pop.map((venue) => ( 
+            <Card className="m-3" style={{ width: '18rem' }}>
+                {venue.media.length>1? <Card.Img variant='top' src={venue.media[0].url} /> : ""}
+                <Card.Body>
+                    <Card.Title>{venue.name}</Card.Title>
+                    <Card.Text>{venue.location.city}, {venue.location.country} </Card.Text>
+                    <Card.Text> Max guests: {venue.maxGuests} </Card.Text>
+                    <Card.Text> Price: {venue.price} $ </Card.Text>
+                    <Link className="btn btn-info" to={`/venue/${venue.id}`}>View</Link>
+                </Card.Body>
+            </Card>
+     ));
+    }
+    else{
+        return <h3 className="my-3"> No match to your search, try something else. </h3>;  
+    }  
 }
 
 function Venues() {
 
     const [searchValue, setSearchValue] = useState("");
     
-    function onSearchChange(event) {
-        setSearchValue(event.target.value);
+    function OnSearchChange (event) {
+        setSearchValue(event.target.value); 
     }
 
-    const products = GetProducts(searchValue); 
-
+    const venues = GetVenues(searchValue); 
+    
     return (
         <main>
-            <h1 className="text-info"> eCOM</h1>
-            <h2>Your primary destination for great deals</h2>
+            <h1 className="text-info pt-5 mt-5"> Holidaze Venue Catalog</h1>
+            <h2 className="text-center mt-1 mb-4">Your primary destination for great deals</h2>
             <Container>
-                <Row>
-                    <Form.Control value={searchValue} className="m-5" size="lg" type="text" placeholder="Search" onChange={onSearchChange} />
+                <Row >
+                    <Form.Control className="my-4" type="text" onChange={OnSearchChange} placeholder="Search"/>
                 </Row>
                 <Row className="justify-content-center">
-                    {products}
+                    {venues}
                 </Row>
             </Container>
         </main>
