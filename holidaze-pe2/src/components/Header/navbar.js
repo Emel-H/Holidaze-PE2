@@ -7,7 +7,6 @@ function NavBar() {
   const loggedIn = userDetails((state) => state.loggedIn);
   const username = userDetails((state) => state.name);
   const clear = userDetails((state) => state.clear);
-  console.log(loggedIn);
   return (
     <Navbar expand="md" className="fixed-top" bg='dark'>
       <Container>
