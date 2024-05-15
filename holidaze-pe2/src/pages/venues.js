@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Card, Container, Row, Spinner } from 'react-bootstrap';
+import {Form, Card, Container, Row, Spinner } from 'react-bootstrap';
  
 const url = "https://v2.api.noroff.dev/holidaze/venues?page=";
-const searchUrl = "https://v2.api.noroff.dev/holidaze/venues/search?page=";
 
 function GetVenues(search){
     
@@ -25,13 +24,7 @@ function GetVenues(search){
                 let morePages = true;
                 let allVenues=[];
                 while(morePages){
-                    let response;
-                    if(search.toString()==""){
-                        response = await fetch(url+page.toString());
-                    }
-                    else{
-                        response = await fetch(searchUrl+page.toString()+"&q="+search);
-                    }
+                    const response = await fetch(url+page.toString());
                     const json = await response.json();
                     allVenues.push(...json.data);
                     if(json.meta.pageCount>page){
@@ -42,7 +35,7 @@ function GetVenues(search){
                     }
                 }
                 
-                // Setting our `products` state to the API data we received
+                // Setting our `venues` state to the API data we received
                 setVenues(allVenues);
                 // Clear the loading state once we've successfully got our data
                 setIsLoading(false);
@@ -63,40 +56,38 @@ function GetVenues(search){
         return <h2>Error loading data from our servers</h2>;
     }
     else{
-        
-        if(venues.length >1){
-            return PopulateVenues(venues);
-        }
-        else{
-            return <h2> No match to your search, try something else </h2>;
-        }
-        
+        return PopulateVenues(venues, search); 
     }
     
 }
 
-function PopulateVenues(venues){
-    return venues.map((venue) => ( 
-        <Card className="m-3" style={{ width: '18rem' }}>
-            {venue.media.length>1? <Card.Img variant='top' src={venue.media[0].url} /> : ""}
-            <Card.Body>
-                <Card.Title>{venue.name}</Card.Title>
-                <Card.Text>{venue.location.city}, {venue.location.country} </Card.Text>
-                <Card.Text> Max guests: {venue.maxGuests} </Card.Text>
-                <Card.Text> Price: {venue.price} $ </Card.Text>
-                <Link className="btn btn-info" to={`/venue/${venue.id}`}>View</Link>
-            </Card.Body>
-        </Card>
- ));
+function PopulateVenues(venues, search){
+    const pop = (venues.filter((venue) => venue.name.toLowerCase().includes(search.toLowerCase())||venue.description.toLowerCase().includes(search.toLowerCase())));
+    if(pop.length>1){
+        return pop.map((venue) => ( 
+            <Card className="m-3" style={{ width: '18rem' }}>
+                {venue.media.length>1? <Card.Img variant='top' src={venue.media[0].url} /> : ""}
+                <Card.Body>
+                    <Card.Title>{venue.name}</Card.Title>
+                    <Card.Text>{venue.location.city}, {venue.location.country} </Card.Text>
+                    <Card.Text> Max guests: {venue.maxGuests} </Card.Text>
+                    <Card.Text> Price: {venue.price} $ </Card.Text>
+                    <Link className="btn btn-info" to={`/venue/${venue.id}`}>View</Link>
+                </Card.Body>
+            </Card>
+     ));
+    }
+    else{
+        return <h3 className="my-3"> No match to your search, try something else. </h3>;  
+    }  
 }
 
 function Venues() {
 
     const [searchValue, setSearchValue] = useState("");
     
-    const OnSearch = (event) => {
-        event.preventDefault();
-        setSearchValue(event.target[0].value);
+    function OnSearchChange (event) {
+        setSearchValue(event.target.value); 
     }
 
     const venues = GetVenues(searchValue); 
@@ -107,10 +98,7 @@ function Venues() {
             <h2 className="text-center mt-1 mb-4">Your primary destination for great deals</h2>
             <Container>
                 <Row >
-                    <form  onSubmit={OnSearch}>
-                        <input type="text" style={{width:'18rem'}}/>
-                        <div type="submit" className="btn btn-dark mb-4 mx-3">Search</div>
-                    </form>
+                    <Form.Control className="my-4" type="text" onChange={OnSearchChange} placeholder="Search"/>
                 </Row>
                 <Row className="justify-content-center">
                     {venues}
