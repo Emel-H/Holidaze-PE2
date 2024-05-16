@@ -5,8 +5,7 @@ import {Form, Card, Container, Row, Spinner } from 'react-bootstrap';
 const url = "https://v2.api.noroff.dev/holidaze/venues?page=";
 
 function GetVenues(search){
-    
-    let [venues, setVenues] = useState([]);
+    const [venues, setVenues] = useState([]);
     // State for holding our loading state
     const [isLoading, setIsLoading] = useState(true);
     // State for holding our error state
@@ -24,17 +23,21 @@ function GetVenues(search){
                 let morePages = true;
                 let allVenues=[];
                 while(morePages){
-                    const response = await fetch(url+page.toString());
+                    const response = await fetch(url+page.toString()+"&_owner=true");
                     const json = await response.json();
-                    allVenues.push(...json.data);
-                    if(json.meta.pageCount>page){
-                        page++;
+                    if(response.ok){
+                        allVenues.push(...json.data);
+                        if(json.meta.pageCount>page){
+                            page++;
+                        }
+                        else{
+                            morePages=false;
+                        }
                     }
                     else{
-                        morePages=false;
+                        alert(json.errors[0].message);
                     }
                 }
-                
                 // Setting our `venues` state to the API data we received
                 setVenues(allVenues);
                 // Clear the loading state once we've successfully got our data
@@ -68,7 +71,7 @@ function PopulateVenues(venues, search){
             <Card className="m-3" style={{ width: '18rem' }}>
                 {venue.media.length>1? <Card.Img variant='top' src={venue.media[0].url} /> : ""}
                 <Card.Body>
-                    <Card.Title>{venue.name}</Card.Title>
+                    <Card.Title>{venue.name} by <Link className="" to={`/profile/${venue.owner.name}`}>{venue.owner.name}</Link></Card.Title>
                     <Card.Text>{venue.location.city}, {venue.location.country} </Card.Text>
                     <Card.Text> Max guests: {venue.maxGuests} </Card.Text>
                     <Card.Text> Price: {venue.price} $ </Card.Text>

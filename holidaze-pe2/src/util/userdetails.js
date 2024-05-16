@@ -2,12 +2,13 @@ import { create } from 'zustand';
 
 export const userDetails = create( (set) => ({
     loggedIn: false,
-    accessToken: "",
-    avatarURL: "",
-    bannerURL: "",
-    bio: "",
-    email: "",
-    name: "",
+    apiKey:"",
+    accessToken:"",
+    avatarURL:"",
+    bannerURL:"",
+    bio:"",
+    email:"",
+    name:"",
     venueManager: false,
     addUser: (data) => set({ 
         loggedIn: true,
@@ -21,6 +22,7 @@ export const userDetails = create( (set) => ({
     }),
     clear: () => set({ 
         loggedIn: false,
+        apiKey: "",
         accessToken: "",
         avatarURL: "",
         bannerURL: "",
@@ -28,5 +30,8 @@ export const userDetails = create( (set) => ({
         email: "",
         name: "",
         venueManager: false
+    }),
+    addApiKey: (key) => set({ 
+        apiKey: key
     }),
 }));

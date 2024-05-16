@@ -39,13 +39,12 @@ function Home() {
             })
         };
         const response = await fetch(registerUrl,requestOptions);
+        const json = await response.json();
         if(response.ok){
-            const json = await response.json();
             addUser(json.data);
-            navigate("../profile");
+            navigate("../profile/"+json.data.name);
         }
         else{
-            const json = await response.json();
             alert(json.errors[0].message);
         }
 
@@ -61,7 +60,7 @@ function Home() {
                     <p className="text-center mt-1 mb-4" id="userFeedback">Enter registration info below</p>
                     <form onSubmit={RegisterUser} className="need-validation border border-dark rounded">
                         <div className="form-group my-4 mx-3">
-                            <label htmlFor="name">Username</label>
+                            <label htmlFor="username">Username</label>
                             <input type="text" className="form-control" required id="username" aria-label="username"/>
                         </div>
                         <div className="form-group my-4 mx-3">
