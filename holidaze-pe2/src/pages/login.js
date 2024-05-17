@@ -3,11 +3,13 @@ import { useNavigate, Link } from 'react-router-dom';
 import { userDetails } from '../util/userdetails';
 
 const loginurl = "https://v2.api.noroff.dev/auth/login?_holidaze=true";
+const apiurl = "https://v2.api.noroff.dev/auth/create-api-key";
 
 
 function Login() {
 
     const addUser = userDetails((state) => state.addUser);
+    const addApiKey = userDetails((state) => state.addApiKey);
     const navigate = useNavigate();
 
     const LoginUser = async (event) => {
@@ -26,13 +28,27 @@ function Login() {
             })
         };
         const response = await fetch(loginurl,requestOptions);
+        const json = await response.json();
         if(response.ok){
-            const json = await response.json();
             addUser(json.data);
-            navigate("../profile");
+            const requestOptions1 = {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${json.data.accessToken}`
+                },
+                
+            };
+            const response1 = await fetch(apiurl,requestOptions1);
+            const json1 = await response1.json();
+            if(response1.ok){
+                addApiKey(json1.data.key);
+                navigate("../profile/"+json.data.name);
+            }
+            else{
+                alert(json1.errors[0].message);
+            }
         }
         else{
-            const json = await response.json();
             alert(json.errors[0].message);
         }
     }

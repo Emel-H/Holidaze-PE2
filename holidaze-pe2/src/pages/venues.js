@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Form, Card, Container, Row, Spinner } from 'react-bootstrap';
+import {Form, Card, Container, Row, Spinner, ListGroup } from 'react-bootstrap';
  
 const url = "https://v2.api.noroff.dev/holidaze/venues?page=";
 
 function GetVenues(search){
-    
-    let [venues, setVenues] = useState([]);
+    const [venues, setVenues] = useState([]);
     // State for holding our loading state
     const [isLoading, setIsLoading] = useState(true);
     // State for holding our error state
@@ -24,17 +23,21 @@ function GetVenues(search){
                 let morePages = true;
                 let allVenues=[];
                 while(morePages){
-                    const response = await fetch(url+page.toString());
+                    const response = await fetch(url+page.toString()+"&_owner=true");
                     const json = await response.json();
-                    allVenues.push(...json.data);
-                    if(json.meta.pageCount>page){
-                        page++;
+                    if(response.ok){
+                        allVenues.push(...json.data);
+                        if(json.meta.pageCount>page){
+                            page++;
+                        }
+                        else{
+                            morePages=false;
+                        }
                     }
                     else{
-                        morePages=false;
+                        alert(json.errors[0].message);
                     }
                 }
-                
                 // Setting our `venues` state to the API data we received
                 setVenues(allVenues);
                 // Clear the loading state once we've successfully got our data
@@ -65,15 +68,18 @@ function PopulateVenues(venues, search){
     const pop = (venues.filter((venue) => venue.name.toLowerCase().includes(search.toLowerCase())||venue.description.toLowerCase().includes(search.toLowerCase())));
     if(pop.length>1){
         return pop.map((venue) => ( 
-            <Card className="m-3" style={{ width: '18rem' }}>
-                {venue.media.length>1? <Card.Img variant='top' src={venue.media[0].url} /> : ""}
+            <Card className="border-dark m-3" style={{ width: '18rem' }}>
+                <Card.Header>{venue.media.length>1? <Card.Img variant='top' src={venue.media[0].url} /> : ""}</Card.Header>
                 <Card.Body>
-                    <Card.Title>{venue.name}</Card.Title>
+                    <Card.Title>{venue.name} </Card.Title>
+                    <Card.Text>Managed by <Link className="text-primary" to={`/profile/${venue.owner.name}`}>{venue.owner.name}</Link></Card.Text>
                     <Card.Text>{venue.location.city}, {venue.location.country} </Card.Text>
-                    <Card.Text> Max guests: {venue.maxGuests} </Card.Text>
-                    <Card.Text> Price: {venue.price} $ </Card.Text>
-                    <Link className="btn btn-info" to={`/venue/${venue.id}`}>View</Link>
                 </Card.Body>
+                <ListGroup>
+                    <ListGroup.Item> Max guests: {venue.maxGuests} </ListGroup.Item>
+                    <ListGroup.Item> Price: {venue.price} $ </ListGroup.Item>
+                </ListGroup>
+                <Link className="btn btn-dark mt-1 mb-1" to={`/venue/${venue.id}`}>View</Link>
             </Card>
      ));
     }

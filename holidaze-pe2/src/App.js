@@ -29,13 +29,12 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route exact path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/register" element={<Register />} />
             <Route path="/venues" element={<Venues />} />
             <Route path="/venue/:id" element={<Venue />} />
           </Route>
         </Routes>
-
         <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" ></script>
         <script src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js" ></script>
         <script src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js" ></script>

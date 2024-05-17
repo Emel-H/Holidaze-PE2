@@ -4,10 +4,10 @@ import { Container, Row, Col, Spinner } from 'react-bootstrap';
 
 
  
-const producturl = "https://v2.api.noroff.dev/online-shop/";
+const venueUrl = "https://v2.api.noroff.dev/holidaze/venues/";
 
-function GetProduct(id){
-    let [product, setProduct] = useState([]);
+function GetVenue(id){
+    let [venue, setVenue] = useState([]);
     // State for holding our loading state
     const [isLoading, setIsLoading] = useState(true);
     // State for holding our error state
@@ -21,10 +21,10 @@ function GetProduct(id){
                 setIsError(false);
                 // Turn on the loading state each time we do an API call
                 setIsLoading(true);
-                const response = await fetch(producturl+id);
+                const response = await fetch(venueUrl+id+"?_owner=true");
                 const json = await response.json();
-                // Setting our `product` state to the API data we received
-                setProduct(json.data);
+                // Setting our `venue` state to the API data we received
+                setVenue(json.data);
                 // Clear the loading state once we've successfully got our data
                 setIsLoading(false);
             } catch (error) {
@@ -44,45 +44,19 @@ function GetProduct(id){
         return <h2>Error loading data</h2>;
     }
     else{
-        let reviews = (
-            <Row className="justify-content-center mt-2 mx-5 border bg-white">
-                <p>No reviews available</p>
-            </Row>
-            );
-        if(product.reviews.length>1){
-            reviews = product.reviews.map((review) => ( 
-                    <Row key={review.id} className="justify-content-center mt-2 mx-5 border bg-white">
-                        <Col md={4}>
-                            <Row><h3>{review.username}</h3></Row>
-                            <Row><h4>Rating: {review.rating}</h4></Row>
-                        </Col>
-                        <Col md={5}>
-                            <Row>
-                                <h4>Description:</h4>
-                                <p>{review.description}</p>
-                            </Row>
-                        </Col>
-                    </Row>
-             ));
-        }
         return (
-            <Container className=""> 
+            <Container className="mt-5 pt-5" style={{ flex: 1 }}> 
                 <Row className="mx-5 border bg-white">
                     <Col md={4}>
-                        <img src={product.image.url} alt={product.image.alt} width="100%"></img>
+                        <img src={venue.media[0].url} alt={venue.media[0].alt} width="100%"></img>
                     </Col>
                     <Col md={5}>
-                        <Row className="ml-1"><h2>{product.title}</h2></Row>
-                        <Row className="ml-1"> <p>{product.description} </p></Row>
-                        <Row className="mb-5 ml-1"> <h3>Rating: {product.rating}</h3></Row>
-                        <Row className="ml-1"> <h4>Price: {product.price===product.discountedPrice ? product.discountedPrice+"$" : product.discountedPrice+"$ discounted:"+ (Math.round((product.discountedPrice-product.price))) +"$ "}</h4> </Row>
+                        <Row className="ml-1"><h2>{venue.name} by <Link className="" to={`/profile/${venue.owner.name}`}>{venue.owner.name}</Link></h2></Row>
+                        <Row className="ml-1"> <p>{venue.description} </p></Row>
+                        <Row className="mb-5 ml-1"> <h3>Rating: {venue.rating}</h3></Row>
+                        <Row className="ml-1"> <h4>Price: {venue.price}</h4> </Row>
                     </Col>
                 </Row>
-                <Row className="justify-content-center mt-5">
-                    <h2>User Reviews</h2>
-                </Row>
-                {reviews}
-                
             </Container>
         );
     }
@@ -91,14 +65,14 @@ function GetProduct(id){
  
 function Venue(){
     let params = useParams()
-    const product = GetProduct(params.id);
+    const venue = GetVenue(params.id);
 
 
     return (
         <main>
             <Container>
                 <Row className="justify-content-center">
-                    {product}
+                    {venue}
                 </Row>
             </Container>
             
