@@ -45,7 +45,7 @@ function GetVenue(id){
     }
     else{
         return (
-            <Container className="mt-5 pt-5"> 
+            <Container className="mt-5 pt-5" style={{ flex: 1 }}> 
                 <Row className="mx-5 border bg-white">
                     <Col md={4}>
                         <img src={venue.media[0].url} alt={venue.media[0].alt} width="100%"></img>
