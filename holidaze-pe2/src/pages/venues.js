@@ -68,7 +68,7 @@ function PopulateVenues(venues, search){
     const pop = (venues.filter((venue) => venue.name.toLowerCase().includes(search.toLowerCase())||venue.description.toLowerCase().includes(search.toLowerCase())));
     if(pop.length>1){
         return pop.map((venue) => ( 
-            <Card className=" m-3" style={{ width: '18rem' }}>
+            <Card className=" m-3" style={{ width: '18rem' }} key={venue.id}>
                 <Card.Header>{venue.media.length>0? <Card.Img variant='top' src={venue.media[0].url} /> : <Card.Img variant='top' src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" />}</Card.Header>
                 <Card.Body>
                     <Card.Title>{venue.name} </Card.Title>

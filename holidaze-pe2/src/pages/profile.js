@@ -58,7 +58,7 @@ function GetProfile(id, token, key, image, setImage, setUserVenues,setUserBookin
                         </div>
                     </Col>
                     <Col md={8}>
-                        <Row className="ml-1 "><h2>{profile.name}</h2></Row>
+                        <Row className="ml-1 mt-3"><h2>{profile.name}</h2></Row>
                         <Row className="ml-1 "> <p>{profile.bio} </p></Row>
                         <Row className="mt-5 ml-1 "> <p>Contact: <a href={`mailto:${profile.email}`}>{profile.email}</a></p></Row>
                     </Col>
@@ -80,7 +80,7 @@ function GetVenues(venues, name, username,venueManager, DeleteVenue){
         );
     }else{
         accordionBodyItems = venues.map((venue)=>(   
-            <Accordion.Body>
+            <Accordion.Body key= {venue.id}>
                 <Row className="border rounded">
                     <Col md={4}>
                         {venue.media.length>0? <Card.Img className="m-2" variant='top' src={venue.media[0].url} /> : <Card.Img variant='top' src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" />}
@@ -195,7 +195,6 @@ async function VenueDelete(venueId, token, key, id, setUserVenues ){
         }
     };
     const response = await fetch(venueUrl+venueId,requestOptions);
-    console.log(response);
     if(response.ok){
         const requestOptions1 = {
             method: 'GET',
