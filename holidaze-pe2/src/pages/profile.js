@@ -87,8 +87,8 @@ function GetVenues(venues, name, username,venueManager, DeleteVenue){
                     </Col>
                     <Col>
                         <h3 className="mt-3">{venue.name}</h3>
-                        <p>Price: {venue.price}$ | Max. guests:{venue.maxGuests}</p>
-                        <Link className="btn btn-dark mt-1 mb-1" to={`/venue/${venue.id}`}>View</Link>
+                        <p>Price: {venue.price}$ | Max. guests:{venue.maxGuests} </p>
+                        {name===username&&venueManager?<Link className="btn btn-dark mt-1 mb-1" to={`/venue/${venue.id}`}>View Bookings</Link> : <Link className="btn btn-dark mt-1 mb-1" to={`/venue/${venue.id}`}>View</Link>}
                         {name===username&&venueManager?<Link className="btn btn-dark mt-1 mb-1 mx-1" to={`/addeditvenue/${venue.id}`}>Edit</Link>:""}
                         {name===username&&venueManager?<Link className="btn btn-danger mt-1 mb-1" id={venue.id} onClick={DeleteVenue}>Delete</Link>:""}
                     </Col>
@@ -224,7 +224,7 @@ function Profile(){
     const [image, setImage] = useState("https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif");
     const [userVenues, setUserVenues] = useState();
     const [userBookings, setUserBookings] = useState();
-    let params = useParams()
+    let params = useParams();
     const token = userDetails((state) => state.accessToken);
     const key = userDetails((state) => state.apiKey);
     const [name, setName] = useState();
