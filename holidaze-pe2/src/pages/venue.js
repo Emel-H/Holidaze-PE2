@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 
-
- 
 const venueUrl = "https://v2.api.noroff.dev/holidaze/venues/";
 
 function GetVenue(id){
@@ -50,7 +48,7 @@ function GetVenue(id){
                     <Col md={4}>
                         <img src={venue.media[0].url} alt={venue.media[0].alt} width="100%"></img>
                     </Col>
-                    <Col md={5}>
+                    <Col md={7}>
                         <Row className="ml-1"><h2>{venue.name} by <Link className="" to={`/profile/${venue.owner.name}`}>{venue.owner.name}</Link></h2></Row>
                         <Row className="ml-1"> <p>{venue.description} </p></Row>
                         <Row className="mb-5 ml-1"> <h3>Rating: {venue.rating}</h3></Row>

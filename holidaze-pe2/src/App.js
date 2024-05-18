@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Venues from "./pages/venues";
 import Venue from "./pages/venue";
+import AddEditVenue from "./pages/addeditvenue";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/venues" element={<Venues />} />
             <Route path="/venue/:id" element={<Venue />} />
+            <Route path="/addeditvenue/:id" element={<AddEditVenue />} />
           </Route>
         </Routes>
         <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" ></script>

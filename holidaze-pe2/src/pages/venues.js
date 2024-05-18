@@ -68,11 +68,11 @@ function PopulateVenues(venues, search){
     const pop = (venues.filter((venue) => venue.name.toLowerCase().includes(search.toLowerCase())||venue.description.toLowerCase().includes(search.toLowerCase())));
     if(pop.length>1){
         return pop.map((venue) => ( 
-            <Card className="border-dark m-3" style={{ width: '18rem' }}>
-                <Card.Header>{venue.media.length>1? <Card.Img variant='top' src={venue.media[0].url} /> : ""}</Card.Header>
+            <Card className=" m-3" style={{ width: '18rem' }}>
+                <Card.Header>{venue.media.length>0? <Card.Img variant='top' src={venue.media[0].url} /> : <Card.Img variant='top' src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" />}</Card.Header>
                 <Card.Body>
                     <Card.Title>{venue.name} </Card.Title>
-                    <Card.Text>Managed by <Link className="text-primary" to={`/profile/${venue.owner.name}`}>{venue.owner.name}</Link></Card.Text>
+                    <Card.Text>Managed by <Link className="text-info" to={`/profile/${venue.owner.name}`}>{venue.owner.name}</Link></Card.Text>
                     <Card.Text>{venue.location.city}, {venue.location.country} </Card.Text>
                 </Card.Body>
                 <ListGroup>
@@ -103,8 +103,8 @@ function Venues() {
             <h1 className="text-info pt-5 mt-5"> Holidaze Venue Catalog</h1>
             <h2 className="text-center mt-1 mb-4">Your primary destination for great deals</h2>
             <Container>
-                <Row >
-                    <Form.Control className="my-4" type="text" onChange={OnSearchChange} placeholder="Search"/>
+                <Row className="justify-content-center mt-5">
+                    <Form.Control className="my-4 w-75" type="text" onChange={OnSearchChange} placeholder="Search"/>
                 </Row>
                 <Row className="justify-content-center">
                     {venues}
