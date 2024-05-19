@@ -104,7 +104,7 @@ function GetVenue(venueInfo){
 function GetBooking(userBookings, loggedIn, CreateBooking, dateFromChanged, dateToChanged, numGuestsChanged){
     
     const disableBookedDates = (date) => {
-        if (userBookings == ""){
+        if (userBookings === ""){
             return false;
         }else{ 
             let dayBooked = false; 
