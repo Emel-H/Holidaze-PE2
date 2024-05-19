@@ -1,77 +1,249 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from 'react-router-dom';
-import { Container, Row, Col, Spinner } from 'react-bootstrap';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Carousel, ListGroup, ListGroupItem, Form, Spinner} from 'react-bootstrap'; 
+import { userDetails } from '../util/userdetails';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers';
 
 const venueUrl = "https://v2.api.noroff.dev/holidaze/venues/";
+const bookingUrl = "https://v2.api.noroff.dev/holidaze/bookings";
 
-function GetVenue(id){
-    let [venue, setVenue] = useState([]);
-    // State for holding our loading state
-    const [isLoading, setIsLoading] = useState(true);
-    // State for holding our error state
-    const [isError, setIsError] = useState(false);
-
+function GetVenueInfo(id, setImages, setOwnerName, setUserBookings, setVenueInfo){
+   
     // The useEffect will run once when the component first mounts
     useEffect(() => {
         async function getData() {
-            try {
-                // Reset the error state in case there as an error previously
-                setIsError(false);
-                // Turn on the loading state each time we do an API call
-                setIsLoading(true);
-                const response = await fetch(venueUrl+id+"?_owner=true");
-                const json = await response.json();
-                // Setting our `venue` state to the API data we received
-                setVenue(json.data);
-                // Clear the loading state once we've successfully got our data
-                setIsLoading(false);
-            } catch (error) {
-                // Clear the loading state if we get an error and then
-                // set our error state to true
-                setIsLoading(false);
-                setIsError(true);
-            } 
+            
+            const response = await fetch(venueUrl+id+"?_owner=true&_bookings=true");
+            const json = await response.json();
+            
+            if(response.ok){
+                setVenueInfo(json.data);
+                setImages(json.data.media);
+                setOwnerName(json.data.owner.name);
+                setUserBookings(json.data.bookings);
+            }
+            else{
+                alert(json.errors[0].message);
+            }
+            
         }
         getData();
-    }, [id]);
+    }, [id, setImages, setOwnerName, setUserBookings, setVenueInfo]);
+}
 
-    if (isLoading) {
-        return <Spinner animation="border" role="status"></Spinner>;
-    }
-    else if (isError){
-        return <h2>Error loading data</h2>;
+async function BookingCreate(dateFrom, dateTo, numberOfGuests, token, key, venueId, username, navigate){
+    console.log(dateFrom);
+    console.log(dateTo);
+    console.log(numberOfGuests);
+    const requestOptions = {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            "X-Noroff-API-Key": key
+        },
+        body: JSON.stringify({ 
+            "dateFrom": new Date(dateFrom), 
+            "dateTo": new Date(dateTo), 
+            "guests": Number(numberOfGuests),
+            "venueId": venueId
+        })
+    };
+    const response = await fetch(bookingUrl,requestOptions);
+    const json = await response.json();
+    if(response.ok){
+        navigate("../profile/"+username);
     }
     else{
-        return (
-            <Container className="mt-5 pt-5" style={{ flex: 1 }}> 
-                <Row className="mx-5 border bg-white">
-                    <Col md={4}>
-                        <img src={venue.media[0].url} alt={venue.media[0].alt} width="100%"></img>
-                    </Col>
-                    <Col md={7}>
-                        <Row className="ml-1"><h2>{venue.name} by <Link className="" to={`/profile/${venue.owner.name}`}>{venue.owner.name}</Link></h2></Row>
-                        <Row className="ml-1"> <p>{venue.description} </p></Row>
-                        <Row className="mb-5 ml-1"> <h3>Rating: {venue.rating}</h3></Row>
-                        <Row className="ml-1"> <h4>Price: {venue.price}</h4> </Row>
-                    </Col>
-                </Row>
-            </Container>
+        alert(json.errors[0].message);
+    }
+}
+
+function GetCarosel(images){
+    if(images.length>0){
+        return images.map((image) => (
+            <Carousel.Item>
+                <img style={{maxHeight:"580px"}} className="w-100" src={image.url} alt={image.alt} />
+            </Carousel.Item>
+        ));
+    }
+    else{
+        return(
+            <Carousel.Item>
+                <img style={{maxHeight:"380px"}} className="w-100" src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" alt="placeholder for venue with no images" />
+            </Carousel.Item>
         );
     }
 }
 
- 
-function Venue(){
-    let params = useParams()
-    const venue = GetVenue(params.id);
+function GetVenue(venueInfo){
+    if(venueInfo===""){
+        return <Spinner className='my-3' animation="border" role="status"></Spinner>;
+    }
+    else{
+        return (
+            <Row className="mt-3 mx-1 ">
+                <Col md={5} lg={6}>
+                    <Row> <p>Managed by: <Link className="" to={`/profile/${venueInfo.owner.name}`}>{venueInfo.owner.name}</Link></p></Row>
+                    <Row> <p>Contact: <a href={`mailto:${venueInfo.owner.email}`}>{venueInfo.owner.email} </a></p></Row>
+                    <Row> <p>Max.Guests: {venueInfo.maxGuests}</p></Row>
+                    <Row> <p>Price: {venueInfo.price} $</p> </Row>
+                </Col>
+                <Col md={7} lg={6}>
+                    <Row> <p>Description:</p><p>{venueInfo.description.substring(0,400)} </p></Row>
+                    <Row> <p>Amminites: {venueInfo.meta.pets?"Pets | ":""} {venueInfo.meta.parking?"Parking | ":""} {venueInfo.meta.wifi?"Wifi | ":""} {venueInfo.meta.breakfast?"Breakfast ":""}</p></Row>
+                </Col>
+            </Row>
+        );
+    }
+    
+}
 
+function GetBooking(userBookings, loggedIn, CreateBooking, dateFromChanged, dateToChanged, numGuestsChanged){
+    
+    const disableBookedDates = (date) => {
+        if (userBookings == ""){
+            return false;
+        }else{ 
+            let dayBooked = false; 
+            userBookings.forEach(booking => {
+                const firstDay = new Date(booking.dateFrom);  
+                const lastDay = new Date(booking.dateTo);
+
+                //calculate days difference  
+                var daysDifference = (lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24);
+
+                if(date.$d.getDate()===firstDay.getDate()&&date.$d.getMonth()===firstDay.getMonth()&&date.$d.getYear()===firstDay.getYear() ){
+                    dayBooked = true;
+                }
+
+                for (let index = 0; index < daysDifference; index++) {
+                    const day = (new Date(firstDay.setDate(firstDay.getDate()+1)));
+                    if(date.$d.getDate()===day.getDate()&&date.$d.getMonth()===day.getMonth()&&date.$d.getYear()===day.getYear() ){
+                        dayBooked = true;
+                    }
+                }
+            });
+            return dayBooked
+        }
+        };
+
+    if (loggedIn){
+        return (
+            <Container className="my-3 border rounded px-5 py-2">
+                <h2 className="text-center mb-3">Book this venue</h2> 
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <Row className="my-3">
+                        <Col md={6}>
+                            <p className="mx-3">Date From:</p>
+                            <Container components={['DatePicker']}>
+                                <DatePicker onChange={dateFromChanged} disablePast shouldDisableDate={disableBookedDates}/>
+                            </Container>
+                        </Col>
+                        <Col md={6}>
+                            <p className="mx-3">Date To:</p> 
+                            <Container components={['DatePicker']}>
+                                <DatePicker onChange={dateToChanged} disablePast shouldDisableDate={disableBookedDates}/>
+                            </Container>
+                        </Col>
+                    </Row>
+                    <Row className="justify-content-center mt-3">
+                        
+                        <label className="text-center">Number of Guests:</label>
+                        <Form.Control type="text" className="form-control w-25" onChange={numGuestsChanged}></Form.Control> 
+                        <label className="text-center">__________</label>
+                        <button className="btn btn-dark my-3 w-25" onClick={CreateBooking}>Book</button>
+                    </Row>
+                         
+                </LocalizationProvider>
+            </Container>
+        );
+    }
+    else{
+        return (<p className="text-center">Please log in to book this venue</p>);
+    }
+}
+
+function GetVenueBookings(userBookings){
+    if(userBookings.length>0){
+        const bookings = userBookings.map((booking) => (
+            <ListGroupItem>
+                    <div className="float-start"><p><Link  to={`/profile/${booking.customer.name}`}>{booking.customer.name}</Link> with {booking.guests} guests</p></div>
+                    <div className="float-end"><p>From: {new Date(booking.dateFrom).toLocaleDateString()} To: {new Date(booking.dateTo).toLocaleDateString()}</p></div>
+            </ListGroupItem>
+        ));
+        return (
+            <ListGroup>
+                <h2 className="text-center">Bookings to your venue</h2>
+                {bookings}
+            </ListGroup>
+        );
+    }
+    else{
+        return (
+            <Container className="text-center">            
+                <h2 >Bookings to your venue</h2>
+                <p className="pt-2">Currently no bookings to this venue</p>
+            </Container>
+        );
+
+    }
+    
+}
+
+function Venue(){
+    const params = useParams();
+    const navigate = useNavigate();
+
+    const [images, setImages] = useState(["https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif"]);
+    const [ownerName, setOwnerName] = useState(""); 
+    const [userBookings, setUserBookings] = useState("");
+    const [venueInfo, setVenueInfo] = useState("");
+    GetVenueInfo(params.id, setImages, setOwnerName, setUserBookings, setVenueInfo);
+
+    const [dateFrom, setDateFrom] = useState("");
+    const [dateTo, setDateTo] = useState("");
+    const [numberOfGuests, setNumberOfGuests] = useState("");
+
+    const token = userDetails((state) => state.accessToken);
+    const key = userDetails((state) => state.apiKey);
+    const username = userDetails((state) => state.name);
+    const loggedIn = userDetails((state) => state.loggedIn);
+    const venueManager = userDetails((state) => state.venueManager);
+
+    const CreateBooking = async (event) => {
+        BookingCreate(dateFrom, dateTo, numberOfGuests, token, key, params.id, username, navigate);
+    }
+
+    const dateFromChanged = (event) => {
+        if(event != null){setDateFrom(event.$d);}
+    }
+    const dateToChanged = (event) => {
+        if(event != null){setDateTo(event.$d)}; 
+    }
+    const numGuestsChanged = (event) => {
+        setNumberOfGuests(event.target.value);
+    }
+
+    const carosel = GetCarosel(images);
+    const venueInformation = GetVenue(venueInfo);
+    const bookingVenue = GetBooking(userBookings, loggedIn, CreateBooking, dateFromChanged, dateToChanged, numGuestsChanged);
+    const myVenueBookings = GetVenueBookings(userBookings);
 
     return (
         <main>
-            <Container>
+            <Container className="text-start px-5">
+                <h1 className="pt-5 mt-5">{venueInfo.name}</h1>
                 <Row className="justify-content-center">
-                    {venue}
+                    <Carousel className="text-center" data-bs-theme="dark">
+                        {carosel}
+                    </Carousel>
                 </Row>
+                {venueInformation}
+                {ownerName===username&&venueManager?<Row className="border-top py-4"> {myVenueBookings}</Row> : <Row>{bookingVenue}</Row>}
+                
             </Container>
             
         </main>
