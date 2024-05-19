@@ -53,7 +53,7 @@ function GetVenues(search){
     }, []);
 
     if (isLoading) {
-        return <Spinner animation="border" role="status"></Spinner>;
+        return <Spinner className='my-3' animation="border" role="status"></Spinner>;
     }
     else if (isError){
         return <h2>Error loading data from our servers</h2>;
