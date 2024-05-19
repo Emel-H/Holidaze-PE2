@@ -44,7 +44,7 @@ function GetProfile(id, token, key, image, setImage, setUserVenues,setUserBookin
             }
         }
         getData();
-    },[id, token, key, image, setImage]);
+    },[id, token, key, image, setImage, setUserVenues, setUserBookings, setName]);
 
     if (isLoading) {
         return <Spinner animation="border" role="status"></Spinner>;
