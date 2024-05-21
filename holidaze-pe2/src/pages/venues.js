@@ -100,8 +100,7 @@ function Venues() {
     
     return (
         <main>
-            <h1 className="text-info pt-5 mt-5"> Holidaze Venue Catalog</h1>
-            <h2 className="text-center mt-1 mb-4">Your primary destination for great deals</h2>
+            <h1 className="text-dark pt-5 mt-5">Venues Catalog</h1>
             <Container>
                 <Row className="justify-content-center mt-5">
                     <Form.Control className="my-4 w-75" type="text" onChange={OnSearchChange} placeholder="Search"/>

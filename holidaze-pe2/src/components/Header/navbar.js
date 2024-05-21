@@ -10,11 +10,12 @@ function NavBar() {
   return (
     <Navbar expand="md" className="fixed-top border-bottom" bg='white'>
       <Container>
-        <Navbar.Brand className="text-dark">HOLIDAZE</Navbar.Brand>
+        <Navbar.Brand className="text-dark"><Link className="text-dark mx-2 text-decoration-none" to="/">HOLIDAZE</Link></Navbar.Brand>
         <Navbar.Toggle className="bg-light" aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="align-items-center">
             <Nav.Item className="py-2"><Link className="text-dark mx-2" to="/">Home</Link></Nav.Item>
+            <Nav.Item className="py-2"><Link className="text-dark mx-2" to="/guide">Guide</Link></Nav.Item>
             <Nav.Item className="py-2"><Link className="text-dark mx-2" to="/venues">Venues</Link></Nav.Item>
             <Nav.Item className="py-2">{loggedIn?<Link className="text-dark mx-2" to={`/profile/${username}`}>Hi, {username}</Link>:<Link></Link>}</Nav.Item>
             <Nav.Item className="py-2">{loggedIn? <Link className='text-dark mx-2 btn btn-outline-info' onClick={function(){clear()}} to="/">Log out</Link> : <Link className='text-dark mx-2 btn btn-outline-info' to='/login'>Login</Link>}</Nav.Item>
