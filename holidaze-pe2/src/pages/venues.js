@@ -39,6 +39,7 @@ function GetVenues(search){
                     }
                 }
                 // Setting our `venues` state to the API data we received
+                allVenues.reverse();
                 setVenues(allVenues);
                 // Clear the loading state once we've successfully got our data
                 setIsLoading(false);
