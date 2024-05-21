@@ -241,7 +241,7 @@ function Venue(){
 
     return (
         <main>
-            <Container className="text-start px-5">
+            <Container className="text-start px-md-5">
                 <h1 className="pt-5 mt-5">{venueInfo.name}</h1>
                 <Row className="justify-content-center">
                     <Carousel className="text-center" data-bs-theme="dark">
