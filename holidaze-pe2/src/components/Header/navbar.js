@@ -8,17 +8,17 @@ function NavBar() {
   const username = userDetails((state) => state.name);
   const clear = userDetails((state) => state.clear);
   return (
-    <Navbar expand="md" className="fixed-top border-bottom" bg='white'>
+    <Navbar collapseOnSelect expand="md" className="fixed-top border-bottom" bg='white'>
       <Container>
         <Navbar.Brand className="text-dark"><Link className="text-dark mx-2 text-decoration-none" to="/">HOLIDAZE</Link></Navbar.Brand>
         <Navbar.Toggle className="bg-light" aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <Nav className="align-items-center">
-            <Nav.Item className="py-2"><Link className="text-dark mx-2" to="/">Home</Link></Nav.Item>
-            <Nav.Item className="py-2"><Link className="text-dark mx-2" to="/guide">Guide</Link></Nav.Item>
-            <Nav.Item className="py-2"><Link className="text-dark mx-2" to="/venues">Venues</Link></Nav.Item>
-            <Nav.Item className="py-2">{loggedIn?<Link className="text-dark mx-2" to={`/profile/${username}`}>Hi, {username}</Link>:<Link></Link>}</Nav.Item>
-            <Nav.Item className="py-2">{loggedIn? <Link className='text-dark mx-2 btn btn-outline-info' onClick={function(){clear()}} to="/">Log out</Link> : <Link className='text-dark mx-2 btn btn-outline-info' to='/login'>Login</Link>}</Nav.Item>
+          <Nav>
+            <Nav.Link eventKey={0} as={Link} className="py-3 text-dark mx-2" to="/">Home</Nav.Link>
+            <Nav.Link eventKey={1} as={Link} className="py-3 text-dark mx-2" to="/guide">Guide</Nav.Link>
+            <Nav.Link eventKey={2} as={Link} className="py-3 text-dark mx-2" to="/venues">Venues</Nav.Link>
+            {loggedIn? <Nav.Link eventKey={3} as={Link} className="py-3 text-dark mx-2" to={`/profile/${username}`}>Hi, {username}</Nav.Link>:""}
+            {loggedIn? <Nav.Link eventKey={4} as={Link} className='mx-2' onClick={function(){clear()}} to="/"><div className='text-dark btn btn-outline-info'>Log out</div></Nav.Link> : <Nav.Link eventKey={4} as={Link} className='mx-2' to='/login'><div className='text-dark btn btn-outline-info'>Login</div></Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>
