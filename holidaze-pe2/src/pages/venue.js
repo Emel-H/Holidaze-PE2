@@ -64,15 +64,15 @@ async function BookingCreate(dateFrom, dateTo, numberOfGuests, token, key, venue
 function GetCarosel(images){
     if(images.length>0){
         return images.map((image) => (
-            <Carousel.Item>
-                <img style={{maxHeight:"580px"}} className="w-100" src={image.url} alt={image.alt} />
+            <Carousel.Item >
+                <img style={{maxHeight:"70vh"}} className="w-100" src={image.url} alt={image.alt} />
             </Carousel.Item>
         ));
     }
     else{
         return(
             <Carousel.Item>
-                <img style={{maxHeight:"380px"}} className="w-100" src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" alt="placeholder for venue with no images" />
+                <img style={{maxHeight:"70vh"}} className="w-100" src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" alt="placeholder for venue with no images" />
             </Carousel.Item>
         );
     }
@@ -84,7 +84,7 @@ function GetVenue(venueInfo){
     }
     else{
         return (
-            <Row className="mt-3 mx-1 ">
+            <Row className="mt-5 mx-1 ">
                 <Col md={5} lg={6}>
                     <Row> <p>Managed by: <Link className="" to={`/profile/${venueInfo.owner.name}`}>{venueInfo.owner.name}</Link></p></Row>
                     <Row> <p>Contact: <a href={`mailto:${venueInfo.owner.email}`}>{venueInfo.owner.email} </a></p></Row>
@@ -135,26 +135,33 @@ function GetBooking(userBookings, loggedIn, CreateBooking, dateFromChanged, date
             <Container className="my-3 border rounded px-5 py-2">
                 <h2 className="text-center mb-3">Book this venue</h2> 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Row className="my-3">
-                        <Col md={6}>
-                            <p className="mx-3">Date From:</p>
+                    <Row className="my-3 justify-content-center mt-3">
+                        <Col md={4}>
+                            <p className="mx-3 mt-3">Date From:</p>
                             <Container components={['DatePicker']}>
                                 <DatePicker onChange={dateFromChanged} disablePast shouldDisableDate={disableBookedDates}/>
                             </Container>
                         </Col>
-                        <Col md={6}>
-                            <p className="mx-3">Date To:</p> 
+                        <Col md={4}>
+                            <p className="mx-3 mt-3">Date To:</p> 
                             <Container components={['DatePicker']}>
                                 <DatePicker onChange={dateToChanged} disablePast shouldDisableDate={disableBookedDates}/>
                             </Container>
                         </Col>
+                        <Col md={4}>
+                            <label className="text-center mx-3 mt-3">Guests:</label>
+                            <Form.Control type="text" className="form-control mt-3 w-50 mx-3" onChange={numGuestsChanged}></Form.Control> 
+                        
+                        </Col>
                     </Row>
                     <Row className="justify-content-center mt-3">
+                        <Col md={4}></Col>
+                        <Col md={4} className="text-center border-top border-dark mt-3">
                         
-                        <label className="text-center">Number of Guests:</label>
-                        <Form.Control type="text" className="form-control w-25" onChange={numGuestsChanged}></Form.Control> 
-                        <label className="text-center">__________</label>
-                        <button className="btn btn-dark my-3 w-25" onClick={CreateBooking}>Book</button>
+                        <button className="btn btn-dark my-3 w-50" onClick={CreateBooking}>Book</button>
+                    
+                        </Col>
+                        <Col md={4}></Col>
                     </Row>
                          
                 </LocalizationProvider>
