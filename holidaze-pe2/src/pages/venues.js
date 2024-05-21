@@ -69,7 +69,7 @@ function PopulateVenues(venues, search){
     if(pop.length>0){
         return pop.map((venue) => ( 
             <Card className=" m-3" style={{ width: '18rem' }} key={venue.id}>
-                <Card.Header>{venue.media.length>0? <Card.Img style={{maxHeight:"15vh"}} className=" w-100" variant='top' src={venue.media[0].url} /> : <Card.Img style={{maxHeight:"15vh"}} className=" w-100" variant='top' src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" />}</Card.Header>
+                <Card.Header>{venue.media.length>0? <Card.Img style={{maxHeight:"18vh"}} className=" w-100" variant='top' src={venue.media[0].url} /> : <Card.Img style={{maxHeight:"15vh"}} className=" w-100" variant='top' src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" />}</Card.Header>
                 <Card.Body>
                     <Card.Title>{venue.name} </Card.Title>
                     <Card.Text>Managed by <Link className="text-info" to={`/profile/${venue.owner.name}`}>{venue.owner.name}</Link></Card.Text>

@@ -8,16 +8,16 @@ function NavBar() {
   const username = userDetails((state) => state.name);
   const clear = userDetails((state) => state.clear);
   return (
-    <Navbar expand="md" className="fixed-top" bg='dark'>
+    <Navbar expand="md" className="fixed-top border-bottom" bg='white'>
       <Container>
-        <Navbar.Brand className="text-white">Holidaze</Navbar.Brand>
+        <Navbar.Brand className="text-dark">HOLIDAZE</Navbar.Brand>
         <Navbar.Toggle className="bg-light" aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="align-items-center">
-            <Nav.Item><Link className="text-light mx-2" to="/">Home</Link></Nav.Item>
-            <Nav.Item><Link className="text-light mx-2" to="/venues">Venues</Link></Nav.Item>
-            <Nav.Item>{loggedIn?<Link className="text-light mx-2" to={`/profile/${username}`}>{username}</Link>:<Link></Link>}</Nav.Item>
-            <Nav.Item>{loggedIn? <Link className='text-light mx-2 btn btn-outline-info' onClick={function(){clear()}} to="/">Log out</Link> : <Link className='text-light mx-2 btn btn-outline-info' to='/login'>Login</Link>}</Nav.Item>
+            <Nav.Item><Link className="text-dark mx-2" to="/">Home</Link></Nav.Item>
+            <Nav.Item><Link className="text-dark mx-2" to="/venues">Venues</Link></Nav.Item>
+            <Nav.Item>{loggedIn?<Link className="text-dark mx-2" to={`/profile/${username}`}>Hi, {username}</Link>:<Link></Link>}</Nav.Item>
+            <Nav.Item>{loggedIn? <Link className='text-dark mx-2 btn btn-outline-info' onClick={function(){clear()}} to="/">Log out</Link> : <Link className='text-dark mx-2 btn btn-outline-info' to='/login'>Login</Link>}</Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>
