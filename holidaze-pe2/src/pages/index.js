@@ -16,7 +16,7 @@ function Home() {
                 <Row className="mx-5 mt-5">
                     <Col md={6} className=" bg-dark">
                         <h1 className="mt-5 px-5 text-white">Need help to book and manage </h1>
-                        <Link className="float-center my-3 btn btn-outline-info" to="/guide">Go to Guide</Link>
+                        <Link className="float-center my-3 btn btn-outline-info text-white" to="/guide">Go to Guide</Link>
                     </Col>
                     <Col md={6} className="bg-info">
                         <img className="w-100 overflow-hidden" src="" alt=""/>
@@ -28,7 +28,7 @@ function Home() {
                     </Col>
                     <Col md={6} className="bg-dark">
                         <h1 className="mt-5 px-5 text-white"> Join the Holidaze community</h1>
-                        <Link className="float-center my-3 btn btn-outline-info" to="/Register">Register Here</Link>    
+                        <Link className="float-center my-3 btn btn-outline-info text-white" to="/Register">Register Here</Link>    
                     </Col>
                 </Row> 
             </Container>
