@@ -1,11 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { userDetails } from '../util/userdetails';
  
 const registerUrl = "https://v2.api.noroff.dev/auth/register";
 
 function Home() {
-    const addUser = userDetails((state) => state.addUser);
     const navigate = useNavigate();
     const RegisterUser = async (event) => {
         event.preventDefault();
