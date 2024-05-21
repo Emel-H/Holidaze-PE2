@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
     return (
-      <footer className="bg-light text-dark border-top mt-5 py-3">
+      <footer className="bg-white text-dark border-top border-bottom mt-5 py-3">
         <p className="">Follow us:</p>
         <p>
             <a className="btn btn-dark mx-1" href="https://www.facebook.com" ><i className="bi bi-facebook text-info"></i></a>
