@@ -1,6 +1,8 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export const userDetails = create( (set) => ({
+export const userDetails = create( 
+    persist((set) => ({
     loggedIn: false,
     apiKey:"",
     accessToken:"",
@@ -34,4 +36,7 @@ export const userDetails = create( (set) => ({
     addApiKey: (key) => set({ 
         apiKey: key
     }),
-}));
+    }),
+    {
+        name:"user-storage"
+    }));
