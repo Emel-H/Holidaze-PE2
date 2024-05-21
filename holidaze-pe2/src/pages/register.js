@@ -13,9 +13,8 @@ function Home() {
         const email = event.target[1].value;
         const password = event.target[2].value;
         const avatar = event.target[3].value;
-        const banner = event.target[4].value;
-        const bio = event.target[5].value;
-        const venueManager = event.target[6].checked;
+        const bio = event.target[4].value;
+        const venueManager = event.target[5].checked;
         
         const requestOptions = {
             method: 'POST',
@@ -30,10 +29,6 @@ function Home() {
                     url: avatar,
                     alt: "profile avatar image"
                 },
-                banner: {
-                    url: banner,
-                    alt: "profile banner image"
-                },
                 venueManager: venueManager,
                 password: password
             })
@@ -41,8 +36,8 @@ function Home() {
         const response = await fetch(registerUrl,requestOptions);
         const json = await response.json();
         if(response.ok){
-            addUser(json.data);
-            navigate("../profile/"+json.data.name);
+            alert("Registration successful, please login to proceed");
+            navigate("../login");
         }
         else{
             alert(json.errors[0].message);
@@ -77,11 +72,6 @@ function Home() {
                             <label htmlFor="avatar">Avatar</label>
                             <input type="url" className="form-control" required id="avatar"/>
                             <small id="avatartext" className="form-text text-muted">To add an avatar image to your profile, please include the image URL</small>
-                        </div>
-                        <div className="form-group my-4 mx-3">
-                            <label htmlFor="banner">Banner</label>
-                            <input type="url" className="form-control" required id="banner"/>
-                            <small id="bannertext" className="form-text text-muted">To add a banner image to your profile, please include the image URL</small>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="bio">Biography</label>
