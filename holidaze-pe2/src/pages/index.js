@@ -9,11 +9,11 @@ function Home() {
     return (
         <main>
             <Container fluid className='pt-5 my-3'>
-                <Row className="mx-5 mt-5 position-relative">
+                <Row className="mt-5 position-relative">
                     <img className="w-100" src={banner} alt="banner for the home page"/>
                     <Link className='position-absolute bottom-0 end-0 translate-middle btn btn-info w-25' to="/venues">Book</Link>
                 </Row>
-                <Row className="mx-5 mt-5">
+                <Row className="mx-0 mt-2">
                     <Col md={6} className=" bg-dark">
                         <h1 className="mt-5 px-5 text-white">Need help to book and manage </h1>
                         <Link className="float-center my-3 btn btn-outline-info text-white" to="/guide">Go to Guide</Link>
@@ -22,7 +22,7 @@ function Home() {
                         <img className="w-100 overflow-hidden" src="" alt=""/>
                     </Col>
                 </Row>
-                <Row className="mx-5">
+                <Row className="mx-0">
                     <Col md={6} className=" bg-info">
                         <img className="w-100 overflow-hidden" src="" alt=""/>    
                     </Col>
