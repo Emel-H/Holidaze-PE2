@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col } from 'react-bootstrap';
-import banner from "../images/homepage2.jpg";
+import banner from "../images/homepage.jpg";
 import venue from "../images/venue.jpg";
 import community from "../images/community.jpg";
 
