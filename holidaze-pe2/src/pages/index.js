@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col } from 'react-bootstrap';
-import banner from "../images/homepage.jpg";
+import banner from "../images/homepage2.jpg";
 
 function Home() {
 
@@ -11,7 +11,7 @@ function Home() {
             <Container fluid className='pt-5 my-3'>
                 <Row className="mx-5 mt-5 position-relative">
                     <img className="w-100" src={banner} alt="banner for the home page"/>
-                    <Link className='position-absolute bottom-0 end-0 translate-middle btn btn-info w-25' to="/venues"> Book Now </Link>
+                    <Link className='position-absolute bottom-0 end-0 translate-middle btn btn-info w-25' to="/venues">Book</Link>
                 </Row>
                 <Row className="mx-5 mt-5">
                     <Col md={6} className=" bg-dark">
