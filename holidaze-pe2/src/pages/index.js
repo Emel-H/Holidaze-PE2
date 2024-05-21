@@ -12,7 +12,7 @@ function Home() {
                 <Row className="mx-md-5 mt-5 position-relative">
                     <img className="" src={banner} alt="banner for the home page"/>
                     
-                    <Link className='position-absolute bottom-0 end-0 translate-middle btn btn-primary w-25' to="/guide"> Book Now </Link>
+                    <Link className='position-absolute bottom-0 end-0 translate-middle btn btn-info w-25' to="/venues"> Book Now </Link>
                 </Row>
                 <Row className="mx-md-5 mt-5">
                     <Col md={6} className=" bg-secondary">
