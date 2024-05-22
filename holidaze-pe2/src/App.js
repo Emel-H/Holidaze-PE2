@@ -10,8 +10,8 @@ import Venues from "./pages/venues";
 import Venue from "./pages/venue";
 import AddEditVenue from "./pages/addeditvenue";
 import Guide from "./pages/guide";
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Layout() {
   return (
@@ -20,7 +20,7 @@ function Layout() {
       <Outlet />
       <Footer />
     </div>
-  )
+  );
 }
 
 function App() {
@@ -39,9 +39,9 @@ function App() {
             <Route path="/guide" element={<Guide />} />
           </Route>
         </Routes>
-        <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" ></script>
-        <script src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js" ></script>
-        <script src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"></script>
       </div>
     </BrowserRouter>
   );
