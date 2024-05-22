@@ -17,7 +17,7 @@ function Home() {
                 </Row>
                 <Row className="mx-0 mt-2">
                     <Col md={6} className=" bg-dark">
-                        <h1 className="mt-2 px-5 text-white">Need help to book and manage </h1>
+                        <h1 className="mt-2 pt-md-4 px-5 text-white">Need help to book and manage </h1>
                         <Link className="float-center my-1 btn btn-outline-info text-white" to="/guide">Go to Guide</Link>
                     </Col>
                     <Col md={6} className="bg-info">
@@ -29,7 +29,7 @@ function Home() {
                         <img className="w-100 overflow-hidden" src={community} alt="people working in a group in lobby"/>    
                     </Col>
                     <Col md={6} className="bg-dark">
-                        <h1 className="mt-2 px-5 text-white"> Join the Holidaze community</h1>
+                        <h1 className="mt-2 pt-md-4 px-5 text-white"> Join the Holidaze community</h1>
                         <Link className="float-center my-1 btn btn-outline-info text-white" to="/Register">Register Here</Link>    
                     </Col>
                 </Row> 
