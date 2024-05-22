@@ -84,8 +84,8 @@ function GetVenue(venueInfo){
         return (
             <Row className="mt-5 mx-1 ">
                 <Col md={5} lg={6}>
-                    <Row> <p>Managed by: <Link className="" to={`/profile/${venueInfo.owner.name}`}>{venueInfo.owner.name}</Link></p></Row>
-                    <Row> <p>Contact: <a href={`mailto:${venueInfo.owner.email}`}>{venueInfo.owner.email} </a></p></Row>
+                    <Row> <p>Managed by: <Link className="text-dark" to={`/profile/${venueInfo.owner.name}`}>{venueInfo.owner.name}</Link></p></Row>
+                    <Row> <p>Contact: <a className="text-dark" href={`mailto:${venueInfo.owner.email}`}>{venueInfo.owner.email} </a></p></Row>
                     <Row> <p>Max.Guests: {venueInfo.maxGuests}</p></Row>
                     <Row> <p>Price: {venueInfo.price} $</p> </Row>
                 </Col>
@@ -137,18 +137,18 @@ function GetBooking(userBookings, loggedIn, CreateBooking, dateFromChanged, date
                         <Col md={4}>
                             <p className="mx-3 mt-3">Date From:</p>
                             <Container components={['DatePicker']}>
-                                <DatePicker onChange={dateFromChanged} disablePast shouldDisableDate={disableBookedDates}/>
+                                <DatePicker className="bg-white" onChange={dateFromChanged} disablePast shouldDisableDate={disableBookedDates}/>
                             </Container>
                         </Col>
                         <Col md={4}>
                             <p className="mx-3 mt-3">Date To:</p> 
                             <Container components={['DatePicker']}>
-                                <DatePicker onChange={dateToChanged} disablePast shouldDisableDate={disableBookedDates}/>
+                                <DatePicker className="bg-white" onChange={dateToChanged} disablePast shouldDisableDate={disableBookedDates}/>
                             </Container>
                         </Col>
                         <Col md={4}>
                             <label htmlFor="numberOfGuests" className="text-center mx-3 mt-3">Guests:</label>
-                            <Form.Control aria-label="number of guests" id="numberOfGuests" name="numOfGuests" type="text" className="form-control mt-3 w-50 mx-3" onChange={numGuestsChanged}></Form.Control> 
+                            <Form.Control style={{height:"55px"}} aria-label="number of guests" id="numberOfGuests" name="numOfGuests" type="text" className="form-control mt-3 w-50 mx-3" onChange={numGuestsChanged}></Form.Control> 
                         
                         </Col>
                     </Row>
@@ -175,7 +175,7 @@ function GetVenueBookings(userBookings){
     if(userBookings.length>0){
         const bookings = userBookings.map((booking) => (
             <ListGroupItem key={booking.id}>
-                    <div className="float-start"><p><Link  to={`/profile/${booking.customer.name}`}>{booking.customer.name}</Link> with {booking.guests} guests</p></div>
+                    <div className="float-start"><p><Link className="text-dark" to={`/profile/${booking.customer.name}`}>{booking.customer.name}</Link> with {booking.guests} guests</p></div>
                     <div className="float-end"><p>From: {new Date(booking.dateFrom).toLocaleDateString()} To: {new Date(booking.dateTo).toLocaleDateString()}</p></div>
             </ListGroupItem>
         ));
