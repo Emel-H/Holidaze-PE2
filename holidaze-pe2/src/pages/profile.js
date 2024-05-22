@@ -11,7 +11,7 @@ function GetProfile(id, token, key, image, setImage, setUserVenues,setUserBookin
 
     const [profile, setProfile] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    
+
     useEffect(() => {
         async function getData() {
             try{
@@ -158,7 +158,7 @@ function GetChangeAvatar(UpdateAvatar){
                     <form onSubmit={UpdateAvatar} className="need-validation ">
                     <Stack direction="horizontal" gap={1}>
                         <label htmlFor="avatar">Image URL:</label>
-                        <input type="url" className="form-control" autoComplete="on" required id="avatar" aria-label="avatar"/>                        
+                        <input type="url" className="form-control" autoComplete="on" required id="avatar" aria-label="avatar" aria-required/>                        
                         <button type="submit" id="SubmitButton" className="btn btn-dark">Update</button>
                     </Stack>
                     </form>
