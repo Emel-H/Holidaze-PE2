@@ -63,7 +63,7 @@ function Home() {
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="InputPassword">Password</label>
-                            <input type="password" className="form-control" minlength="8" required id="InputPassword"/>
+                            <input type="password" className="form-control" minLength="8" required id="InputPassword"/>
                             <small id="password" className="form-text text-muted">For Safety, password must be a minimum of 8 characters in length</small>
                         </div>
                         <div className="form-group my-4 mx-3">

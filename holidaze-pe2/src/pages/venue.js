@@ -34,9 +34,6 @@ function GetVenueInfo(id, setImages, setOwnerName, setUserBookings, setVenueInfo
 }
 
 async function BookingCreate(dateFrom, dateTo, numberOfGuests, token, key, venueId, username, navigate){
-    console.log(dateFrom);
-    console.log(dateTo);
-    console.log(numberOfGuests);
     const requestOptions = {
         method: 'POST',
         headers: { 
@@ -64,7 +61,7 @@ async function BookingCreate(dateFrom, dateTo, numberOfGuests, token, key, venue
 function GetCarosel(images){
     if(images.length>0){
         return images.map((image) => (
-            <Carousel.Item >
+            <Carousel.Item key={image.url}>
                 <img style={{maxHeight:"70vh"}} className="w-100" src={image.url} alt={image.alt} />
             </Carousel.Item>
         ));
@@ -176,7 +173,7 @@ function GetBooking(userBookings, loggedIn, CreateBooking, dateFromChanged, date
 function GetVenueBookings(userBookings){
     if(userBookings.length>0){
         const bookings = userBookings.map((booking) => (
-            <ListGroupItem>
+            <ListGroupItem key={booking.id}>
                     <div className="float-start"><p><Link  to={`/profile/${booking.customer.name}`}>{booking.customer.name}</Link> with {booking.guests} guests</p></div>
                     <div className="float-end"><p>From: {new Date(booking.dateFrom).toLocaleDateString()} To: {new Date(booking.dateTo).toLocaleDateString()}</p></div>
             </ListGroupItem>
