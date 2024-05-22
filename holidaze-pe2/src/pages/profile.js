@@ -119,8 +119,7 @@ function GetBookings(bookings, DeleteBooking){
         );
     }else{
         accordionBodyItems = bookings.map((booking)=>(
-            <Accordion.Body>
-                
+            <Accordion.Body key={booking.id}>
                 <Row className="border rounded">
                     <Col md={4}>
                         {booking.venue.media.length>0? <Card.Img className="m-2" variant='top' src={booking.venue.media[0].url} /> : <Card.Img variant='top' src="https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334" />}
