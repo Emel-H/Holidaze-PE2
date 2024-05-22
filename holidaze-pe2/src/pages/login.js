@@ -30,7 +30,6 @@ function Login() {
         const response = await fetch(loginurl,requestOptions);
         const json = await response.json();
         if(response.ok){
-            addUser(json.data);
             const requestOptions1 = {
                 method: 'POST',
                 headers: {
@@ -41,6 +40,7 @@ function Login() {
             const response1 = await fetch(apiurl,requestOptions1);
             const json1 = await response1.json();
             if(response1.ok){
+                addUser(json.data);
                 addApiKey(json1.data.key);
                 navigate("../profile/"+json.data.name);
             }
