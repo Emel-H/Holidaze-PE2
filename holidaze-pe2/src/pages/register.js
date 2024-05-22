@@ -34,7 +34,7 @@ function Home() {
         const response = await fetch(registerUrl,requestOptions);
         const json = await response.json();
         if(response.ok){
-            alert("Registration successful, please login to proceed");
+            alert("Registration successful, please proceed to login");
             navigate("../login");
         }
         else{

@@ -9,9 +9,9 @@ const profileUrl = "https://v2.api.noroff.dev/holidaze/profiles/";
 
 function GetProfile(id, token, key, image, setImage, setUserVenues,setUserBookings, setName){
 
-    const [profile, setProfile] = useState([]);
+    const [profile, setProfile] = useState();
     const [isLoading, setIsLoading] = useState(true);
-  
+    
     useEffect(() => {
         async function getData() {
             try{
@@ -48,8 +48,13 @@ function GetProfile(id, token, key, image, setImage, setUserVenues,setUserBookin
 
     if (isLoading) {
         return <Spinner animation="border" role="status"></Spinner>;
-    }
-    else{
+    } else if(profile===undefined||profile===null){
+        return (
+            <Container className="mt-5 pt-5" > 
+                <p>Profile info not found</p>
+            </Container>
+            );
+    } else{
         return (
             <Container className="mt-5 pt-5" > 
                 <Row className="text-dark bg-light border rounded mx-1 px-1"> 
