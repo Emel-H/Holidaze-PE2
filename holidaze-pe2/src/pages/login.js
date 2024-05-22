@@ -65,12 +65,13 @@ function Login() {
                     </p>
                     <form onSubmit={LoginUser} className="border border-dark rounded" >
                         <div className="form-group needs-validation my-4 mx-3">
-                            <label>User Name (Email address)</label>
+                            <label htmlFor="inputEmail">User Name (Email address)</label>
                             <input
                             type="email"
                             className="form-control"
                             required
                             name="InputEmail"
+                            id="inputEmail"
                             aria-describedby="email"
                             pattern="^[A-Za-z0-9._%+\-]+(@stud\.noroff\.no)$"
                             />
@@ -79,13 +80,14 @@ function Login() {
                             >
                         </div>
                         <div className="form-group my-4 mx-3">
-                            <label>Password</label>
+                            <label htmlFor="inputPassword">Password</label>
                             <input
                             type="password"
                             className="form-control"
                             minLength="8"
                             required
                             name="InputPassword"
+                            id="inputPassword"
                             />
                         </div>
 

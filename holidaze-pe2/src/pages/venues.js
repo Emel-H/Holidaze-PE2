@@ -104,7 +104,7 @@ function Venues() {
             <h1 className="text-dark pt-5 mt-5">Venues Catalog</h1>
             <Container>
                 <Row className="justify-content-center mt-5">
-                    <Form.Control className="my-4 w-75" type="text" onChange={OnSearchChange} placeholder="Search"/>
+                    <Form.Control name="search" className="my-4 w-75" type="text" onChange={OnSearchChange} placeholder="Search"/>
                 </Row>
                 <Row className="justify-content-center">
                     {venues}
