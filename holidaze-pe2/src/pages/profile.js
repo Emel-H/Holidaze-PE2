@@ -153,7 +153,7 @@ function GetChangeAvatar(UpdateAvatar){
                     <form onSubmit={UpdateAvatar} className="need-validation ">
                     <Stack direction="horizontal" gap={1}>
                         <label htmlFor="avatar">Image URL:</label>
-                        <input type="url" className="form-control" required id="avatar" aria-label="avatar"/>                        
+                        <input type="url" className="form-control" autoComplete="on" required id="avatar" aria-label="avatar"/>                        
                         <button type="submit" id="SubmitButton" className="btn btn-dark">Update</button>
                     </Stack>
                     </form>

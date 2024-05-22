@@ -17,25 +17,25 @@ function CreateNewVenue(CreateVenue){
                     <form onSubmit={CreateVenue} className="need-validation border border-dark rounded">
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="name">Venue name</label>
-                            <input type="text" className="form-control" required id="name" aria-label="name"/>
+                            <input type="text" className="form-control" autoComplete="on" required id="name" aria-label="name"/>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="description">Description</label>
-                            <input type="textbox" className="form-control" required id="description"/>
+                            <input type="textbox" className="form-control" autoComplete="on" required id="description"/>
                             <small id="descriptiontext" className="form-text text-muted">Add a few words about your venue</small>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="image">Image</label>
-                            <input type="url" className="form-control" id="image"/>
+                            <input type="url" className="form-control" autoComplete="on" id="image"/>
                             <small id="imagetext" className="form-text text-muted">To add an image to your venue, please include the image URL</small>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="price">Price</label>
-                            <input type="text" className="form-control" required id="price" aria-label="price"/>
+                            <input type="text" className="form-control" autoComplete="off" required id="price" aria-label="price"/>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="guests">Max Guests</label>
-                            <input type="text" className="form-control" required id="guests" aria-label="guests"/>
+                            <input type="text" className="form-control" autoComplete="off" required id="guests" aria-label="guests"/>
                         </div>
                         
                         <button type="submit" id="SubmitButton" className="btn btn-dark mb-3">Create</button>
@@ -58,25 +58,25 @@ function UpdateExistingVenue(name,description, image, price, maxGuests, UpdateVe
                     <form onSubmit={UpdateVenue} className="need-validation border border-dark rounded">
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="name">Venue name</label>
-                            <input type="text" className="form-control" id="name" aria-label="name" placeholder={name}/>
+                            <input type="text" className="form-control" autoComplete="on" id="name" aria-label="name" placeholder={name}/>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="description">Description</label>
-                            <input type="textbox" className="form-control" id="description" placeholder={description} />
+                            <input type="textbox" className="form-control" autoComplete="on" id="description" placeholder={description} />
                             <small id="descriptiontext" className="form-text text-muted">Add a few words about your venue</small>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="image">Image</label>
-                            <input type="url" className="form-control" id="image" placeholder={image}/>
+                            <input type="url" className="form-control" autoComplete="on" id="image" placeholder={image}/>
                             <small id="imagetext" className="form-text text-muted">To add an image to your venue, please include the image URL</small>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="price">Price</label>
-                            <input type="text" className="form-control" id="price" placeholder={price} aria-label="price"  />
+                            <input type="text" className="form-control" autoComplete="on" id="price" placeholder={price} aria-label="price"  />
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="guests">Max Guests</label>
-                            <input type="text" className="form-control" id="guests" placeholder={maxGuests} aria-label="guests" />
+                            <input type="text" className="form-control" autoComplete="on" id="guests" placeholder={maxGuests} aria-label="guests" />
                         </div>
                         
                         <button type="submit" id="SubmitButton" className="btn btn-dark mb-3">Update</button>
