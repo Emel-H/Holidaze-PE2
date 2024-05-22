@@ -146,8 +146,8 @@ function GetBooking(userBookings, loggedIn, CreateBooking, dateFromChanged, date
                             </Container>
                         </Col>
                         <Col md={4}>
-                            <label className="text-center mx-3 mt-3">Guests:</label>
-                            <Form.Control type="text" className="form-control mt-3 w-50 mx-3" onChange={numGuestsChanged}></Form.Control> 
+                            <label htmlFor="numberOfGuests" className="text-center mx-3 mt-3">Guests:</label>
+                            <Form.Control id="numberOfGuests" name="numOfGuests" type="text" className="form-control mt-3 w-50 mx-3" onChange={numGuestsChanged}></Form.Control> 
                         
                         </Col>
                     </Row>
