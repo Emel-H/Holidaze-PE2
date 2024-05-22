@@ -66,7 +66,7 @@ function GetProfile(id, token, key, image, setImage, setUserVenues,setUserBookin
                     <Col md={8}>
                         <Row className="ml-1 mt-3"><h2>{profile.name}</h2></Row>
                         <Row className="ml-1 "> <p>{profile.bio} </p></Row>
-                        <Row className="mt-5 ml-1 "> <p>Contact: <a href={`mailto:${profile.email}`}>{profile.email}</a></p></Row>
+                        <Row className="mt-5 ml-1 "> <p>Contact: <a className="text-dark" href={`mailto:${profile.email}`}>{profile.email}</a></p></Row>
                     </Col>
                 </Row>
                 
