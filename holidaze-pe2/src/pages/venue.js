@@ -34,6 +34,7 @@ function GetVenueInfo(id, setImages, setOwnerName, setUserBookings, setVenueInfo
 }
 
 async function BookingCreate(dateFrom, dateTo, numberOfGuests, token, key, venueId, username, navigate){
+    
     const requestOptions = {
         method: 'POST',
         headers: { 
@@ -147,7 +148,7 @@ function GetBooking(userBookings, loggedIn, CreateBooking, dateFromChanged, date
                         </Col>
                         <Col md={4}>
                             <label htmlFor="numberOfGuests" className="text-center mx-3 mt-3">Guests:</label>
-                            <Form.Control id="numberOfGuests" name="numOfGuests" type="text" className="form-control mt-3 w-50 mx-3" onChange={numGuestsChanged}></Form.Control> 
+                            <Form.Control aria-label="number of guests" id="numberOfGuests" name="numOfGuests" type="text" className="form-control mt-3 w-50 mx-3" onChange={numGuestsChanged}></Form.Control> 
                         
                         </Col>
                     </Row>
