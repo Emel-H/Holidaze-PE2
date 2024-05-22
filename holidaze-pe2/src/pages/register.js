@@ -54,26 +54,26 @@ function Home() {
                     <form onSubmit={RegisterUser} className="need-validation border border-dark rounded">
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="username">Username</label>
-                            <input type="text" className="form-control" required id="username" aria-label="username"/>
+                            <input type="text" className="form-control" autoComplete="on" required id="username" aria-label="username"/>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="InputEmail">Email Address (User Name)</label>
-                            <input type="email" className="form-control" required id="InputEmail" aria-describedby="email" pattern="^[A-Za-z0-9._%+\-]+(@stud\.noroff)\.no$"/>
+                            <input type="email" className="form-control" autoComplete="on" required id="InputEmail" aria-describedby="email" pattern="^[A-Za-z0-9._%+\-]+(@stud\.noroff)\.no$"/>
                             <small id="email" className="form-text text-muted">You must use @stud.noroff.no email domains to register</small>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="InputPassword">Password</label>
-                            <input type="password" className="form-control" minLength="8" required id="InputPassword"/>
+                            <input type="password" className="form-control" autoComplete="off" minLength="8" required id="InputPassword"/>
                             <small id="password" className="form-text text-muted">For Safety, password must be a minimum of 8 characters in length</small>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="avatar">Avatar</label>
-                            <input type="url" className="form-control" required id="avatar"/>
+                            <input type="url" className="form-control" autoComplete="on" required id="avatar"/>
                             <small id="avatartext" className="form-text text-muted">To add an avatar image to your profile, please include the image URL</small>
                         </div>
                         <div className="form-group my-4 mx-3">
                             <label htmlFor="bio">Biography</label>
-                            <input type="textbox" className="form-control" required minLength="2" id="bio"/>
+                            <input type="textbox" className="form-control" autoComplete="on" required minLength="2" id="bio"/>
                             <small id="biotext" className="form-text text-muted">Add a few words about yourself</small>
                         </div>
                         <div className="form-group my-4 mx-3">

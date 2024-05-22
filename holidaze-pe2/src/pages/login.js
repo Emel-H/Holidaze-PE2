@@ -72,6 +72,7 @@ function Login() {
                             required
                             name="InputEmail"
                             id="inputEmail"
+                            autoComplete="on"
                             aria-describedby="email"
                             pattern="^[A-Za-z0-9._%+\-]+(@stud\.noroff\.no)$"
                             />
@@ -88,6 +89,7 @@ function Login() {
                             required
                             name="InputPassword"
                             id="inputPassword"
+                            autoComplete="off"
                             />
                         </div>
 
