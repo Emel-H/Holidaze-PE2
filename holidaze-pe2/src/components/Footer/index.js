@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * function that generates the footer component of the website
+ * @returns html code of footer
+ */
 function Footer() {
   return (
     <footer className="bg-white text-dark border-top border-bottom mt-5 py-3">

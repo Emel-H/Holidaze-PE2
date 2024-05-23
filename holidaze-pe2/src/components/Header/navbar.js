@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { userDetails } from "../../util/userdetails";
 
+/**
+ * function that generates the navigation bar component of the website including logic for dynamic population of theelements such as login and logout 
+ * @returns html code of navigation bar
+ */
 function NavBar() {
   const loggedIn = userDetails((state) => state.loggedIn);
   const username = userDetails((state) => state.name);

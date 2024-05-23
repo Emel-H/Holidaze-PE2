@@ -4,13 +4,14 @@ import { userDetails } from "../util/userdetails";
 
 const loginurl = "https://v2.api.noroff.dev/auth/login?_holidaze=true";
 
-function Login() {
-  const addUser = userDetails((state) => state.addUser);
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-
-  const LoginUser = async (event) => {
-    event.preventDefault();
+/**
+ * function to call Noroff API and login a user and store userinfo in storage
+ * @param {Event} event the event from the form containing the user login information that was filled in
+ * @param {function} addUser function to add the user information to persisted storage
+ * @param {function} navigate function to allow navigation from login page upon login success
+ * @param {function} setError function to set error string upon login faliure
+ */
+async function loginUser(event, addUser, navigate, setError){
     setError("");
     const email = event.target[0].value;
     const password = event.target[1].value;
@@ -33,6 +34,20 @@ function Login() {
     } else {
       setError(json.errors[0].message);
     }
+}
+
+/**
+ * function to generate the login page content and return html code for it
+ * @returns html code
+ */
+function Login() {
+  const addUser = userDetails((state) => state.addUser);
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
+  const LoginUser = async (event) => {
+    event.preventDefault();
+    loginUser(event, addUser, navigate, setError);
   };
 
   return (
