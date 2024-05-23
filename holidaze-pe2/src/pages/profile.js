@@ -16,6 +16,18 @@ const venueUrl = "https://v2.api.noroff.dev/holidaze/venues/";
 const bookingUrl = "https://v2.api.noroff.dev/holidaze/bookings/";
 const profileUrl = "https://v2.api.noroff.dev/holidaze/profiles/";
 
+/**
+ * function to get profile information with teh Noroff API and return html code to display it
+ * @param {*} id the id of the profile to get
+ * @param {*} token user token for the api calle
+ * @param {*} key api key for the noroff API calls
+ * @param {String} image image url to set the profile image
+ * @param {function} setImage callback function to set the image value
+ * @param {function} setUserVenues callback function to set the list of venues belonging to the profile
+ * @param {function} setUserBookings callback function to set the list of bookings belonging to the profile
+ * @param {function} setName callback function to set the name of the profile 
+ * @returns html code
+ */
 function GetProfile(
   id,
   token,
@@ -120,6 +132,15 @@ function GetProfile(
   }
 }
 
+/**
+ * 
+ * @param {Array} venues a list of venues to populate in the html code
+ * @param {String} name name of the user from the profile
+ * @param {String} username name of the logged in user retrieved from storage
+ * @param {boolean} venueManager a boolean to state if the loggen in user is a venue manager or not
+ * @param {function} DeleteVenue a callback function to delete a venue
+ * @returns 
+ */
 function GetVenues(venues, name, username, venueManager, DeleteVenue) {
   let accordionBodyItems = "";
   if (typeof venues === "undefined" || venues.length <= 0) {
@@ -201,6 +222,12 @@ function GetVenues(venues, name, username, venueManager, DeleteVenue) {
   );
 }
 
+/**
+ * function that sets the html content of the my bookings section
+ * @param {Array} bookings list of bookings to populate in the html code
+ * @param {function} DeleteBooking a callback function to be able to delete a booking 
+ * @returns html code
+ */
 function GetBookings(bookings, DeleteBooking) {
   let accordionBodyItems = "";
   if (typeof bookings === "undefined" || bookings.length <= 0) {
@@ -257,6 +284,11 @@ function GetBookings(bookings, DeleteBooking) {
   );
 }
 
+/**
+ * function that sets the html content of the change avatar form
+ * @param {function} UpdateAvatar callback function to trigger updating the users profile avatar image
+ * @returns html code
+ */
 function GetChangeAvatar(UpdateAvatar) {
   return (
     <Accordion className="mt-1" data-bs-theme="light" alwaysOpen>
@@ -286,6 +318,14 @@ function GetChangeAvatar(UpdateAvatar) {
   );
 }
 
+/**
+ * function to update users profile image using noroff api 
+ * @param {Event} event the submission event that contains the new image URL
+ * @param {*} token user token to use for the api call
+ * @param {*} key api key to use for api call
+ * @param {*} id user id to add to request URL
+ * @param {function} setImage callback function to set the new image of the user upon successful update
+ */
 async function AvatarUpdate(event, token, key, id, setImage) {
   event.preventDefault();
   const avatar = event.target[0].value;
@@ -314,6 +354,14 @@ async function AvatarUpdate(event, token, key, id, setImage) {
   }
 }
 
+/**
+ * function that calls on Noroff Restapi to delete a venue and retrieve the new venues list for updates
+ * @param {*} venueId the id of the venue to delete
+ * @param {*} token user token to identify the user requesting the delete in the api call
+ * @param {*} key the api key to call the restapi
+ * @param {*} id the id of the user to get the bookings after delete
+ * @param {function} setUserVenues to populate the new list of venues after delete
+ */
 async function VenueDelete(venueId, token, key, id, setUserVenues) {
   const requestOptions = {
     method: "DELETE",
@@ -350,6 +398,14 @@ async function VenueDelete(venueId, token, key, id, setUserVenues) {
   }
 }
 
+/**
+ * function that calls on Noroff Restapi to delete a booking and retrieve the new booking list for updates
+ * @param {*} bookingId the id of the booking to delete
+ * @param {*} token user token to identify the user requesting the delete in the api call
+ * @param {*} key the api key to call the restapi
+ * @param {*} id the id of the user to get the bookings after delete
+ * @param {function} setUserBookings to populate the new list of bookings after delete
+ */
 async function BookingDelete(bookingId, token, key, id, setUserBookings) {
   const requestOptions = {
     method: "DELETE",
