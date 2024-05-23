@@ -55,6 +55,7 @@ async function BookingCreate(
   venueId,
   username,
   navigate,
+  setError,
 ) {
   const requestOptions = {
     method: "POST",
@@ -75,7 +76,7 @@ async function BookingCreate(
   if (response.ok) {
     navigate("../profile/" + username);
   } else {
-    alert(json.errors[0].message);
+    setError(json.errors[0].message);
   }
 }
 
@@ -172,6 +173,7 @@ function GetBooking(
   dateFromChanged,
   dateToChanged,
   numGuestsChanged,
+  error,
 ) {
   const disableBookedDates = (date) => {
     if (userBookings === "") {
@@ -255,6 +257,7 @@ function GetBooking(
           <Row className="justify-content-center mt-3">
             <Col md={4}></Col>
             <Col md={4} className="text-center border-top border-dark mt-3">
+              <p className="text-danger text-center my-3">{error}</p>
               <button
                 className="btn btn-dark my-3 w-50"
                 onClick={CreateBooking}
@@ -314,6 +317,7 @@ function GetVenueBookings(userBookings) {
 function Venue() {
   const params = useParams();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const [images, setImages] = useState([
     "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
@@ -349,6 +353,7 @@ function Venue() {
       params.id,
       username,
       navigate,
+      setError,
     );
   };
 
@@ -375,6 +380,7 @@ function Venue() {
     dateFromChanged,
     dateToChanged,
     numGuestsChanged,
+    error,
   );
   const myVenueBookings = GetVenueBookings(userBookings);
 

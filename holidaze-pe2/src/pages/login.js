@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { userDetails } from "../util/userdetails";
 
@@ -7,9 +7,11 @@ const loginurl = "https://v2.api.noroff.dev/auth/login?_holidaze=true";
 function Login() {
   const addUser = userDetails((state) => state.addUser);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const LoginUser = async (event) => {
     event.preventDefault();
+    setError("");
     const email = event.target[0].value;
     const password = event.target[1].value;
 
@@ -29,7 +31,7 @@ function Login() {
       addUser(json.data);
       navigate("../profile/" + json.data.name);
     } else {
-      alert(json.errors[0].message);
+      setError(json.errors[0].message);
     }
   };
 
@@ -70,7 +72,7 @@ function Login() {
                   autoComplete="off"
                 />
               </div>
-
+              <p className="text-danger text-center my-3">{error}</p>
               <button type="submit" className="btn btn-dark mb-4 mx-3">
                 Sign in
               </button>

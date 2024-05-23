@@ -5,7 +5,7 @@ import { userDetails } from "../util/userdetails";
 
 const venueUrl = "https://v2.api.noroff.dev/holidaze/venues";
 
-function CreateNewVenue(CreateVenue) {
+function CreateNewVenue(CreateVenue, error) {
   return (
     <div className="container">
       <div className="row mb-5">
@@ -77,7 +77,7 @@ function CreateNewVenue(CreateVenue) {
                 aria-label="guests"
               />
             </div>
-
+            <p className="text-danger text-center my-3">{error}</p>
             <button
               type="submit"
               id="SubmitButton"
@@ -100,6 +100,7 @@ function UpdateExistingVenue(
   price,
   maxGuests,
   UpdateVenue,
+  error,
 ) {
   return (
     <div className="container">
@@ -173,7 +174,7 @@ function UpdateExistingVenue(
                 aria-label="guests"
               />
             </div>
-
+            <p className="text-danger text-center my-3">{error}</p>
             <button
               type="submit"
               id="SubmitButton"
@@ -189,7 +190,15 @@ function UpdateExistingVenue(
   );
 }
 
-async function VenueUpdate(event, token, key, id, navigate, username) {
+async function VenueUpdate(
+  event,
+  token,
+  key,
+  id,
+  navigate,
+  username,
+  setError,
+) {
   event.preventDefault();
 
   const name =
@@ -238,11 +247,11 @@ async function VenueUpdate(event, token, key, id, navigate, username) {
   if (response.ok) {
     navigate("../profile/" + username);
   } else {
-    alert(json.errors[0].message);
+    setError(json.errors[0].message);
   }
 }
 
-async function VenueCreate(event, token, key, navigate, username) {
+async function VenueCreate(event, token, key, navigate, username, setError) {
   event.preventDefault();
   const name = event.target[0].value;
   const description = event.target[1].value;
@@ -278,7 +287,7 @@ async function VenueCreate(event, token, key, navigate, username) {
   if (response.ok) {
     navigate("../profile/" + username);
   } else {
-    alert(json.errors[0].message);
+    setError(json.errors[0].message);
   }
 }
 
@@ -318,6 +327,7 @@ function AddEditVenue() {
   const loggedIn = userDetails((state) => state.loggedIn);
   const username = userDetails((state) => state.name);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const [name, setName] = useState();
   const [description, setDescription] = useState();
@@ -327,15 +337,15 @@ function AddEditVenue() {
 
   let addeditvenue = "";
   const UpdateVenue = async (event) => {
-    VenueUpdate(event, token, key, params.id, navigate, username);
+    VenueUpdate(event, token, key, params.id, navigate, username, setError);
   };
   const CreateVenue = async (event) => {
-    VenueCreate(event, token, key, navigate, username);
+    VenueCreate(event, token, key, navigate, username, setError);
   };
 
   if (loggedIn) {
     if (params.id === "new") {
-      addeditvenue = CreateNewVenue(CreateVenue);
+      addeditvenue = CreateNewVenue(CreateVenue, error);
     } else {
       GetVenueInfo(
         params.id,
@@ -352,6 +362,7 @@ function AddEditVenue() {
         price,
         maxGuests,
         UpdateVenue,
+        error,
       );
     }
   } else {
