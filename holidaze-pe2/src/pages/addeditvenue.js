@@ -5,7 +5,13 @@ import { userDetails } from "../util/userdetails";
 
 const venueUrl = "https://v2.api.noroff.dev/holidaze/venues";
 
-function CreateNewVenue(CreateVenue) {
+/**
+ * function to generate the html code of the form to create a new venue
+ * @param {function} CreateVenue a callback function to create a new venue based on form values
+ * @param {String} error a string containing any error messages generated
+ * @returns html code
+ */
+function CreateNewVenue(CreateVenue, error) {
   return (
     <div className="container">
       <div className="row mb-5">
@@ -77,7 +83,7 @@ function CreateNewVenue(CreateVenue) {
                 aria-label="guests"
               />
             </div>
-
+            <p className="text-danger text-center my-3">{error}</p>
             <button
               type="submit"
               id="SubmitButton"
@@ -93,6 +99,17 @@ function CreateNewVenue(CreateVenue) {
   );
 }
 
+/**
+ * function to generate the html code of the form to update an existing venue
+ * @param {String} name the venue name as placeholder for edits
+ * @param {String} description the venue description as placeholder for edits
+ * @param {String} image the venue imageURL as placeholder for edits
+ * @param {Number} price the venue price as placeholder for edits
+ * @param {Number} maxGuests the venue mac guests as placeholder for edits
+ * @param {function} UpdateVenue a callback function to update the venue info
+ * @param {String} error a string containing any error messages generated
+ * @returns html code 
+ */
 function UpdateExistingVenue(
   name,
   description,
@@ -100,6 +117,7 @@ function UpdateExistingVenue(
   price,
   maxGuests,
   UpdateVenue,
+  error,
 ) {
   return (
     <div className="container">
@@ -173,7 +191,7 @@ function UpdateExistingVenue(
                 aria-label="guests"
               />
             </div>
-
+            <p className="text-danger text-center my-3">{error}</p>
             <button
               type="submit"
               id="SubmitButton"
@@ -189,7 +207,24 @@ function UpdateExistingVenue(
   );
 }
 
-async function VenueUpdate(event, token, key, id, navigate, username) {
+/**
+ * function using the Noroff API to edit an existing venue
+ * @param {Event} event event containing the key information of the submitted form
+ * @param {*} token user token for the logeed in user
+ * @param {*} key api key to use the Noroff API
+ * @param {useNavigate} navigate a call to route to navigate to after successful submission
+ * @param {String} username the name of the logged in user
+ * @param {function} setError a callback to set an error message
+ */
+async function VenueUpdate(
+  event,
+  token,
+  key,
+  id,
+  navigate,
+  username,
+  setError,
+) {
   event.preventDefault();
 
   const name =
@@ -238,11 +273,20 @@ async function VenueUpdate(event, token, key, id, navigate, username) {
   if (response.ok) {
     navigate("../profile/" + username);
   } else {
-    alert(json.errors[0].message);
+    setError(json.errors[0].message);
   }
 }
 
-async function VenueCreate(event, token, key, navigate, username) {
+/**
+ * function using the Noroff API to generate a new venue
+ * @param {Event} event event containing the key information of the submitted form
+ * @param {*} token user token for the logeed in user
+ * @param {*} key api key to use the Noroff API
+ * @param {useNavigate} navigate a call to route to navigate to after successful submission
+ * @param {String} username the name of the logged in user
+ * @param {function} setError a callback to set an error message
+ */
+async function VenueCreate(event, token, key, navigate, username, setError) {
   event.preventDefault();
   const name = event.target[0].value;
   const description = event.target[1].value;
@@ -278,10 +322,19 @@ async function VenueCreate(event, token, key, navigate, username) {
   if (response.ok) {
     navigate("../profile/" + username);
   } else {
-    alert(json.errors[0].message);
+    setError(json.errors[0].message);
   }
 }
 
+/**
+ * function that fetches information of an existing venue to get values for the editing
+ * @param {*} id venue identifier
+ * @param {function} setName a callback function to set the name of the venue
+ * @param {function} setDescription a callback function to set the description of the venue
+ * @param {function} setImage a callback function to set the image of the venue
+ * @param {function} setPrice a callback function to set the price of the venue
+ * @param {function} setMaxGuests a callback function to set the max guests of the venue
+ */
 function GetVenueInfo(
   id,
   setName,
@@ -311,6 +364,10 @@ function GetVenueInfo(
   });
 }
 
+/**
+ * function that generates the creation or editing components of a venue
+ * @returns html code 
+ */
 function AddEditVenue() {
   const params = useParams();
   const token = userDetails((state) => state.accessToken);
@@ -318,6 +375,7 @@ function AddEditVenue() {
   const loggedIn = userDetails((state) => state.loggedIn);
   const username = userDetails((state) => state.name);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const [name, setName] = useState();
   const [description, setDescription] = useState();
@@ -327,15 +385,15 @@ function AddEditVenue() {
 
   let addeditvenue = "";
   const UpdateVenue = async (event) => {
-    VenueUpdate(event, token, key, params.id, navigate, username);
+    VenueUpdate(event, token, key, params.id, navigate, username, setError);
   };
   const CreateVenue = async (event) => {
-    VenueCreate(event, token, key, navigate, username);
+    VenueCreate(event, token, key, navigate, username, setError);
   };
 
   if (loggedIn) {
     if (params.id === "new") {
-      addeditvenue = CreateNewVenue(CreateVenue);
+      addeditvenue = CreateNewVenue(CreateVenue, error);
     } else {
       GetVenueInfo(
         params.id,
@@ -352,6 +410,7 @@ function AddEditVenue() {
         price,
         maxGuests,
         UpdateVenue,
+        error,
       );
     }
   } else {

@@ -1,6 +1,10 @@
 import React from "react";
 import { Accordion, Container } from "react-bootstrap";
 
+/**
+ * function to generate the guide page content and return html code for it
+ * @returns html code
+ */
 function Guide() {
   return (
     <main>

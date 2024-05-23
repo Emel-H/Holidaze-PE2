@@ -5,6 +5,10 @@ import banner from "../images/homepage.jpg";
 import venue from "../images/venue.jpg";
 import community from "../images/community.jpg";
 
+/**
+ * function to generate the home page content and return html code for it, with links to various routes for navigation
+ * @returns html code
+ */
 function Home() {
   return (
     <main>
@@ -19,8 +23,8 @@ function Home() {
           </Link>
         </Row>
         <Row className="mx-0 mt-2">
-          <Col md={6} className=" bg-dark">
-            <h1 className="mt-2 pt-sm-4 px-5 text-white">
+          <Col md={6} className="d-flex flex-column align-items-center justify-content-center bg-dark">
+            <h1 className="text-white">
               Need help to book and manage{" "}
             </h1>
             <Link
@@ -46,8 +50,8 @@ function Home() {
               alt="people working in a group in lobby"
             />
           </Col>
-          <Col md={6} className="bg-dark">
-            <h1 className="mt-2 pt-sm-4 px-5 text-white">
+          <Col md={6} className="d-flex flex-column align-items-center justify-content-center bg-dark">
+            <h1 className="text-white">
               {" "}
               Join the Holidaze community
             </h1>

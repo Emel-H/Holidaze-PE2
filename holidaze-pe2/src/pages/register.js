@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const registerUrl = "https://v2.api.noroff.dev/auth/register";
 
 function Home() {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const delay = async (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
   const RegisterUser = async (event) => {
     event.preventDefault();
     const name = event.target[0].value;
@@ -13,6 +19,7 @@ function Home() {
     const avatar = event.target[3].value;
     const bio = event.target[4].value;
     const venueManager = event.target[5].checked;
+    setError("");
 
     const requestOptions = {
       method: "POST",
@@ -31,13 +38,16 @@ function Home() {
         password: password,
       }),
     };
+    setSuccess("Submitting Registration");
     const response = await fetch(registerUrl, requestOptions);
     const json = await response.json();
     if (response.ok) {
-      alert("Registration successful, please proceed to login");
+      setSuccess("Registration successful, proceeding to login");
+      await delay(2000);
       navigate("../login");
     } else {
-      alert(json.errors[0].message);
+      setSuccess("");
+      setError(json.errors[0].message);
     }
   };
 
@@ -130,7 +140,8 @@ function Home() {
                   I would like to be a Venue Manager
                 </label>
               </div>
-
+              <p className="text-danger text-center my-3">{error}</p>
+              <p className="text-success text-center my-3">{success}</p>
               <button
                 type="submit"
                 id="SubmitButton"

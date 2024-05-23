@@ -386,6 +386,10 @@ async function BookingDelete(bookingId, token, key, id, setUserBookings) {
   }
 }
 
+/**
+ * function to generate the profile page content and return html code for it
+ * @returns html code
+ */
 function Profile() {
   const [image, setImage] = useState(
     "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
