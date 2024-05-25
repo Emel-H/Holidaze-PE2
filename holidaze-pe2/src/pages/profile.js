@@ -96,7 +96,7 @@ function GetProfile(
   } else {
     return (
       <Container className="mt-5 pt-5">
-        <Row className="text-dark bg-light border rounded mx-1 px-1">
+        <Row className="text-dark bg-white border rounded mx-1 px-1">
           <Col md={4}>
             <div className="ratio ratio-1x1">
               <Image
@@ -185,7 +185,7 @@ function GetVenues(venues, name, username, venueManager, DeleteVenue) {
             )}
             {name === username && venueManager ? (
               <Link
-                className="btn btn-dark mt-1 mb-1 mx-1"
+                className="btn btn-success mt-1 mb-1 mx-1"
                 to={`/addeditvenue/${venue.id}`}
               >
                 Edit
@@ -307,7 +307,7 @@ function GetChangeAvatar(UpdateAvatar) {
                 aria-label="avatar"
                 aria-required
               />
-              <button type="submit" id="SubmitButton" className="btn btn-dark">
+              <button type="submit" id="SubmitButton" className="btn btn-success">
                 Update
               </button>
             </Stack>
@@ -505,7 +505,7 @@ function Profile() {
           <Container className="mt-2">
             {venueManager && name === username ? (
               <Link
-                className="btn btn-dark my-2 mx-1 float-end"
+                className="btn btn-success my-2 mx-1 float-end"
                 to={`/addeditvenue/new`}
               >
                 Create New Venue

@@ -73,11 +73,11 @@ function NavBar() {
                 }}
                 to="/"
               >
-                <div className="text-dark btn btn-outline-info">Log out</div>
+                <div className="btn btn-outline-primary">Log out</div>
               </Nav.Link>
             ) : (
               <Nav.Link eventKey={4} as={Link} className="mx-2" to="/login">
-                <div className="text-dark btn btn-outline-info">Login</div>
+                <div className="btn btn-outline-primary">Login</div>
               </Nav.Link>
             )}
           </Nav>

@@ -88,7 +88,7 @@ function Login() {
                 />
               </div>
               <p className="text-danger text-center my-3">{error}</p>
-              <button type="submit" className="btn btn-dark mb-4 mx-3">
+              <button type="submit" className="btn btn-success mb-4 mx-3">
                 Sign in
               </button>
             </form>
