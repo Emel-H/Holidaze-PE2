@@ -145,7 +145,7 @@ function Home() {
               <button
                 type="submit"
                 id="SubmitButton"
-                className="btn btn-dark mb-3"
+                className="btn btn-success mb-3"
               >
                 Register
               </button>

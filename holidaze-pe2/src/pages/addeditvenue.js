@@ -87,7 +87,7 @@ function CreateNewVenue(CreateVenue, error) {
             <button
               type="submit"
               id="SubmitButton"
-              className="btn btn-dark mb-3"
+              className="btn btn-success mb-3"
             >
               Create
             </button>
@@ -195,7 +195,7 @@ function UpdateExistingVenue(
             <button
               type="submit"
               id="SubmitButton"
-              className="btn btn-dark mb-3"
+              className="btn btn-success mb-3"
             >
               Update
             </button>

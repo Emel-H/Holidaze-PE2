@@ -259,7 +259,7 @@ function GetBooking(
             <Col md={4} className="text-center border-top border-dark mt-3">
               <p className="text-danger text-center my-3">{error}</p>
               <button
-                className="btn btn-dark my-3 w-50"
+                className="btn btn-success my-3 w-50"
                 onClick={CreateBooking}
               >
                 Book

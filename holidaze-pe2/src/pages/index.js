@@ -12,29 +12,33 @@ import community from "../images/community.jpg";
 function Home() {
   return (
     <main>
-      <Container fluid className="pt-3 my-3 px-md-5">
-        <Row className="mt-5 position-relative">
+      <Container fluid className=" pt-3 my-3 px-md-5">
+        <Row className="mt-5 position-relative mx-md-4 px-md-2">
           <img className="w-100" src={banner} alt="banner for the home page" />
+          
+            <h1 className="position-absolute bottom-50 start-50 translate-middle rounded text-white">
+              Book your dream vacation
+            </h1>
           <Link
-            className="position-absolute bottom-0 end-0 translate-middle btn btn-info w-25"
+            className="position-absolute top-50 start-50 translate-middle btn btn-primary w-25"
             to="/venues"
           >
             Book
           </Link>
         </Row>
-        <Row className="mx-0 mt-2">
+        <Row className="mt-2 mx-md-5">
           <Col md={6} className="d-flex flex-column align-items-center justify-content-center bg-dark">
-            <h1 className="text-white">
+            <h2 className="text-white">
               Need help to book and manage{" "}
-            </h1>
+            </h2>
             <Link
-              className="float-center my-1 btn btn-outline-info text-white"
+              className="float-center my-1 btn btn-outline-primary text-white"
               to="/guide"
             >
               Go to Guide
             </Link>
           </Col>
-          <Col md={6} className="bg-info">
+          <Col md={6} className="bg-dark">
             <img
               className="w-100 overflow-hidden"
               src={venue}
@@ -42,8 +46,8 @@ function Home() {
             />
           </Col>
         </Row>
-        <Row className="mx-0">
-          <Col md={6} className=" bg-info">
+        <Row className="mx-md-5">
+          <Col md={6} className=" bg-dark">
             <img
               className="w-100 overflow-hidden"
               src={community}
@@ -51,12 +55,12 @@ function Home() {
             />
           </Col>
           <Col md={6} className="d-flex flex-column align-items-center justify-content-center bg-dark">
-            <h1 className="text-white">
+            <h2 className="text-white">
               {" "}
               Join the Holidaze community
-            </h1>
+            </h2>
             <Link
-              className="float-center my-1 btn btn-outline-info text-white"
+              className="float-center my-1 btn btn-outline-primary text-white"
               to="/Register"
             >
               Register Here
