@@ -11,6 +11,11 @@ import {
 
 const url = "https://v2.api.noroff.dev/holidaze/venues?page=";
 
+/**
+ * function to call the Noroff API and retrievee all the venue infromation to then display it
+ * @param {String} search the value of the search bar
+ * @returns html code
+ */
 function GetVenues(search) {
   const [venues, setVenues] = useState([]);
   // State for holding our loading state
@@ -69,6 +74,12 @@ function GetVenues(search) {
   }
 }
 
+/**
+ * a function that generates html code for the veneue catalog based on the search value and teh list of venues
+ * @param {Array} venues list of venues 
+ * @param {String} search the value of the search bar
+ * @returns html code
+ */
 function PopulateVenues(venues, search) {
   const pop = venues.filter(
     (venue) =>
@@ -130,6 +141,10 @@ function PopulateVenues(venues, search) {
   }
 }
 
+/**
+ * function to generate teh venues catalog page html code
+ * @returns html code
+ */
 function Venues() {
   const [searchValue, setSearchValue] = useState("");
 

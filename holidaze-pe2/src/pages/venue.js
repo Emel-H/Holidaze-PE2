@@ -18,6 +18,14 @@ import { DatePicker } from "@mui/x-date-pickers";
 const venueUrl = "https://v2.api.noroff.dev/holidaze/venues/";
 const bookingUrl = "https://v2.api.noroff.dev/holidaze/bookings";
 
+/**
+ * function to get the venue infrommation from the Noroff API
+ * @param {*} id venue identification 
+ * @param {function} setImages a function to set the venue images
+ * @param {function} setOwnerName a function to set the owner name
+ * @param {function} setUserBookings a function to set all the user bookings
+ * @param {function} setVenueInfo a function to set all the retrieved venue information
+ */
 function GetVenueInfo(
   id,
   setImages,
@@ -46,6 +54,18 @@ function GetVenueInfo(
   }, [id, setImages, setOwnerName, setUserBookings, setVenueInfo]);
 }
 
+/**
+ * function to book a venue through Noroff API
+ * @param {Date} dateFrom the date from 
+ * @param {Date} dateTo the date to 
+ * @param {Number} numberOfGuests the number of guests
+ * @param {*} token the user token 
+ * @param {*} key the apps API key
+ * @param {*} venueId the id of the venue to book
+ * @param {String} username the username of the user
+ * @param {function} navigate a funtion to navigate away from the page upon success
+ * @param {function} setError a function to communicate any errors
+ */
 async function BookingCreate(
   dateFrom,
   dateTo,
@@ -80,6 +100,11 @@ async function BookingCreate(
   }
 }
 
+/**
+ * a function that returns a carousel with the images from a list
+ * @param {Array} images list of images
+ * @returns html code
+ */
 function GetCarosel(images) {
   if (images.length > 0) {
     return images.map((image) => (
@@ -106,6 +131,11 @@ function GetCarosel(images) {
   }
 }
 
+/**
+ * a function taht returns key bvenue information in html code
+ * @param {Object} venueInfo object containing key venue information
+ * @returns html code
+ */
 function GetVenue(venueInfo) {
   if (venueInfo === "") {
     return (
@@ -166,6 +196,17 @@ function GetVenue(venueInfo) {
   }
 }
 
+/**
+ * a fuction to return the booking of a venue html form and ties callback function to correct form elements 
+ * @param {Array} userBookings a list of dates booked to disable them in calender
+ * @param {boolean} loggedIn boolead to check is user is logged in or not
+ * @param {function} CreateBooking callback to create login function
+ * @param {function} dateFromChanged callback to change of date from 
+ * @param {function} dateToChanged callback to change of date to 
+ * @param {function} numGuestsChanged callback to change of number of guests 
+ * @param {String} error string containing any error messages
+ * @returns 
+ */
 function GetBooking(
   userBookings,
   loggedIn,
@@ -275,6 +316,11 @@ function GetBooking(
   }
 }
 
+/**
+ *  a function that returns a html list of all the bookings on a venue taht you as a user own
+ * @param {Array} userBookings a list of bookings to your venue
+ * @returns html code
+ */
 function GetVenueBookings(userBookings) {
   if (userBookings.length > 0) {
     const bookings = userBookings.map((booking) => (
@@ -314,6 +360,10 @@ function GetVenueBookings(userBookings) {
   }
 }
 
+/**
+ * a function to generate the html code of the specifc venue page
+ * @returns html code
+ */
 function Venue() {
   const params = useParams();
   const navigate = useNavigate();
