@@ -16,74 +16,72 @@ function NavBar() {
     <Navbar
       collapseOnSelect
       expand="md"
-      className="fixed-top border-bottom"
+      className="fixed-top border-bottom px-5"
       bg="white"
     >
-      <Container>
-        <Navbar.Brand className="text-dark w-25 text-start">
-          <Link className="text-dark mx-2 text-decoration-none " to="/">
-            <img className="w-25 " src={logo} alt="site logo" />
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Toggle className="bg-light" aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <Nav>
+      <Navbar.Brand className="text-dark w-25 text-start">
+        <Link className="text-dark text-decoration-none " to="/">
+          <img className="w-25 " src={logo} alt="site logo" />
+        </Link>
+      </Navbar.Brand>
+      <Navbar.Toggle className="bg-light" aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+        <Nav>
+          <Nav.Link
+            eventKey={0}
+            as={Link}
+            className="py-3 text-dark mx-2"
+            to="/"
+          >
+            Home
+          </Nav.Link>
+          <Nav.Link
+            eventKey={1}
+            as={Link}
+            className="py-3 text-dark mx-2"
+            to="/guide"
+          >
+            Guide
+          </Nav.Link>
+          <Nav.Link
+            eventKey={2}
+            as={Link}
+            className="py-3 text-dark mx-2"
+            to="/venues"
+          >
+            Venues
+          </Nav.Link>
+          {loggedIn ? (
             <Nav.Link
-              eventKey={0}
+              eventKey={3}
               as={Link}
               className="py-3 text-dark mx-2"
+              to={`/profile/${username}`}
+            >
+              Hi, {username}
+            </Nav.Link>
+          ) : (
+            ""
+          )}
+          {loggedIn ? (
+            <Nav.Link
+              eventKey={4}
+              as={Link}
+              className="mx-2"
+              onClick={function () {
+                clear();
+              }}
               to="/"
             >
-              Home
+              <div className="btn btn-outline-info text-dark">Log out</div>
             </Nav.Link>
-            <Nav.Link
-              eventKey={1}
-              as={Link}
-              className="py-3 text-dark mx-2"
-              to="/guide"
-            >
-              Guide
+          ) : (
+            <Nav.Link eventKey={4} as={Link} className="mx-2" to="/login">
+              <div className="btn btn-outline-info text-dark">Login</div>
             </Nav.Link>
-            <Nav.Link
-              eventKey={2}
-              as={Link}
-              className="py-3 text-dark mx-2"
-              to="/venues"
-            >
-              Venues
-            </Nav.Link>
-            {loggedIn ? (
-              <Nav.Link
-                eventKey={3}
-                as={Link}
-                className="py-3 text-dark mx-2"
-                to={`/profile/${username}`}
-              >
-                Hi, {username}
-              </Nav.Link>
-            ) : (
-              ""
-            )}
-            {loggedIn ? (
-              <Nav.Link
-                eventKey={4}
-                as={Link}
-                className="mx-2"
-                onClick={function () {
-                  clear();
-                }}
-                to="/"
-              >
-                <div className="btn btn-outline-info text-dark">Log out</div>
-              </Nav.Link>
-            ) : (
-              <Nav.Link eventKey={4} as={Link} className="mx-2" to="/login">
-                <div className="btn btn-outline-info text-dark">Login</div>
-              </Nav.Link>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+          )}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 }
