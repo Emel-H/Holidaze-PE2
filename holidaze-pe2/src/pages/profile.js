@@ -287,9 +287,10 @@ function GetBookings(bookings, DeleteBooking) {
 /**
  * function that sets the html content of the change avatar form
  * @param {function} UpdateAvatar callback function to trigger updating the users profile avatar image
+ * @param {String} error error string if update of avatar fails
  * @returns html code
  */
-function GetChangeAvatar(UpdateAvatar) {
+function GetChangeAvatar(UpdateAvatar, error) {
   return (
     <Accordion className="mt-1" data-bs-theme="light" alwaysOpen>
       <Accordion.Item eventKey="0">
@@ -311,6 +312,7 @@ function GetChangeAvatar(UpdateAvatar) {
                 Update
               </button>
             </Stack>
+            <p className="text-danger text-center my-3">{error}</p>
           </form>
         </Accordion.Body>
       </Accordion.Item>
@@ -325,9 +327,11 @@ function GetChangeAvatar(UpdateAvatar) {
  * @param {*} key api key to use for api call
  * @param {*} id user id to add to request URL
  * @param {function} setImage callback function to set the new image of the user upon successful update
+ * @param {function} setError callback function to set the error message upon failed update
  */
-async function AvatarUpdate(event, token, key, id, setImage) {
+async function AvatarUpdate(event, token, key, id, setImage, setError) {
   event.preventDefault();
+  setError("");
   const avatar = event.target[0].value;
   const requestOptions = {
     method: "PUT",
@@ -350,7 +354,7 @@ async function AvatarUpdate(event, token, key, id, setImage) {
     setImage(event.target[0].value);
     event.target[0].value = "";
   } else {
-    alert(json.errors[0].message);
+    setError(json.errors[0].message);
   }
 }
 
@@ -452,6 +456,7 @@ function Profile() {
   );
   const [userVenues, setUserVenues] = useState();
   const [userBookings, setUserBookings] = useState();
+  const [error, setError] = useState();
   let params = useParams();
   const token = userDetails((state) => state.accessToken);
   const key = userDetails((state) => state.apiKey);
@@ -460,7 +465,7 @@ function Profile() {
   const loggedIn = userDetails((state) => state.loggedIn);
   const venueManager = userDetails((state) => state.venueManager);
   const UpdateAvatar = async (event) => {
-    AvatarUpdate(event, token, key, params.id, setImage);
+    AvatarUpdate(event, token, key, params.id, setImage, setError);
   };
   const DeleteVenue = async (event) => {
     VenueDelete(event.target.id, token, key, params.id, setUserVenues);
@@ -492,7 +497,7 @@ function Profile() {
     }
   }
   if (params.id === username) {
-    changeAvatar = GetChangeAvatar(UpdateAvatar);
+    changeAvatar = GetChangeAvatar(UpdateAvatar, error);
   }
 
   return (
