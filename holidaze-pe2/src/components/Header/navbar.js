@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { userDetails } from "../../util/userdetails";
+import logo from "../../images/logo.png";
 
 /**
  * function that generates the navigation bar component of the website including logic for dynamic population of theelements such as login and logout
@@ -19,9 +20,9 @@ function NavBar() {
       bg="white"
     >
       <Container>
-        <Navbar.Brand className="text-dark">
-          <Link className="text-dark mx-2 text-decoration-none" to="/">
-            HOLIDAZE
+        <Navbar.Brand className="text-dark w-25 text-start">
+          <Link className="text-dark mx-2 text-decoration-none " to="/">
+            <img className="w-25 " src={logo} alt="site logo" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle className="bg-light" aria-controls="basic-navbar-nav" />
