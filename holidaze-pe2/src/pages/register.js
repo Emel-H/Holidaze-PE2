@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 const registerUrl = "https://v2.api.noroff.dev/auth/register";
 
-function Home() {
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const delay = async (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-
-  const RegisterUser = async (event) => {
-    event.preventDefault();
+/**
+ * function to call the Noroff API and register a new user
+ * @param {Event} event the form triggered eveent to retrieve values typed in
+ * @param {function} setError a way to set an error and communicate with the end user
+ * @param {function} setSuccess a way to communicate the success of the registration
+ * @param {function} navigate a function to navigate to another page once registration is successful
+ * @param {function} delay a function to introduce a delay and communicte the success of the registration to the user 
+ */
+async function UserRegister(event, setError,setSuccess, navigate, delay){
     const name = event.target[0].value;
     const email = event.target[1].value;
     const password = event.target[2].value;
@@ -49,6 +48,23 @@ function Home() {
       setSuccess("");
       setError(json.errors[0].message);
     }
+}
+
+/**
+ * function to generate the registration page content and return html code for it
+ * @returns html code
+ */
+function Home() {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const delay = async (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  const RegisterUser = async (event) => {
+    event.preventDefault();
+    UserRegister(event, setError,setSuccess, navigate, delay);
   };
 
   return (

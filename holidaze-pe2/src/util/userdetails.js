@@ -1,6 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+/**
+ * a global variable containing the user details using the zustand library
+ */
 export const userDetails = create(
   persist(
     (set) => ({
