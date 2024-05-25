@@ -24,8 +24,8 @@ function Home() {
   }, []);
   return (
     <main>
-      <Container fluid className=" pt-3 my-3 px-md-5">
-        <Row className="mt-5 position-relative mx-md-5">
+      <Container fluid className=" pt-3 my-3 px-md-5 gx-0">
+        <Row className="mt-5 position-relative mx-md-5 gx-0">
           <Col md={12}>
             <img
               className="w-100 overflow-hidden"
@@ -58,7 +58,7 @@ function Home() {
             )}
           </Col>
         </Row>
-        <Row className="mt-2 mx-md-5">
+        <Row className="mt-2 mx-md-5 gx-0">
           <Col
             md={6}
             className="d-flex flex-column align-items-center justify-content-center bg-dark"
@@ -79,7 +79,7 @@ function Home() {
             />
           </Col>
         </Row>
-        <Row className="mx-md-5">
+        <Row className="mx-md-5 gx-0">
           <Col md={6} className="bg-info">
             <img
               className="w-100 overflow-hidden"
