@@ -71,7 +71,7 @@ function Home() {
               Go to Guide
             </Link>
           </Col>
-          <Col md={6} className="bg-dark">
+          <Col md={6} className="bg-info">
             <img
               className="w-100 overflow-hidden"
               src={venue}
@@ -80,7 +80,7 @@ function Home() {
           </Col>
         </Row>
         <Row className="mx-md-5">
-          <Col md={6} className=" bg-dark">
+          <Col md={6} className="bg-info">
             <img
               className="w-100 overflow-hidden"
               src={community}
