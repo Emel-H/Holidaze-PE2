@@ -25,7 +25,7 @@ function Home() {
   return (
     <main>
       <Container fluid className=" pt-3 my-3 px-md-5">
-        <Row className="mt-5 position-relative mx-md-4">
+        <Row className="mt-5 position-relative mx-md-5">
           <Col md={12}>
             <img
               className="w-100 overflow-hidden"
