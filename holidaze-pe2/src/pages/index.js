@@ -25,26 +25,37 @@ function Home() {
   return (
     <main>
       <Container fluid className=" pt-3 my-3 px-md-5">
-        <Row className="mt-5 position-relative mx-md-5">
+        <Row className="mt-5 position-relative mx-md-4">
           <Col md={12}>
             <img
               className="w-100 overflow-hidden"
               src={banner}
               alt="banner for the home page"
             />
-            {windowWidth > 350 ? (
-              <h1 className="position-absolute bottom-50 start-50 translate-middle rounded text-white">
+            {windowWidth > 420 ? (
+              <h1 className="position-absolute bottom-50 start-50 translate-middle text-white">
                 Book your dream vacation
               </h1>
             ) : (
-              ""
+              <h1 className="position-absolute bottom-50 start-0 rounded text-white mx-3">
+                Book your dream vacation
+              </h1>
             )}
-            <Link
-              className="position-absolute top-50 start-50 translate-middle btn btn-primary w-25"
-              to="/venues"
-            >
-              Book
-            </Link>
+            {windowWidth > 420 ? (
+              <Link
+                className="position-absolute top-50 start-50 translate-middle btn btn-primary w-25"
+                to="/venues"
+              >
+                Book
+              </Link>
+            ) : (
+              <Link
+                className="position-absolute top-50 start-50 btn btn-primary w-25"
+                to="/venues"
+              >
+                Book
+              </Link>
+            )}
           </Col>
         </Row>
         <Row className="mt-2 mx-md-5">
