@@ -46,7 +46,7 @@ function Home() {
                 className="position-absolute top-50 start-50 translate-middle btn btn-primary w-25"
                 to="/venues"
               >
-                Book
+                Book Now
               </Link>
             ) : (
               <Link
