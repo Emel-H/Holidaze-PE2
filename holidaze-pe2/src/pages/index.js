@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import banner from "../images/homepage.jpg";
@@ -10,15 +10,25 @@ import community from "../images/community.jpg";
  * @returns html code
  */
 function Home() {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+ 
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+ 
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
   return (
     <main>
       <Container fluid className=" pt-3 my-3 px-md-5">
         <Row className="mt-5 position-relative mx-md-4 px-md-2">
           <img className="w-100" src={banner} alt="banner for the home page" />
           
-            <h1 className="position-absolute bottom-50 start-50 translate-middle rounded text-white">
-              Book your dream vacation
-            </h1>
+            {windowWidth>350?<h1 className='position-absolute bottom-50 start-50 translate-middle rounded text-white'>Book your dream vacation</h1>:""}
           <Link
             className="position-absolute top-50 start-50 translate-middle btn btn-primary w-25"
             to="/venues"
