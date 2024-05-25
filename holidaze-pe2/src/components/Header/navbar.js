@@ -4,7 +4,7 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { userDetails } from "../../util/userdetails";
 
 /**
- * function that generates the navigation bar component of the website including logic for dynamic population of theelements such as login and logout 
+ * function that generates the navigation bar component of the website including logic for dynamic population of theelements such as login and logout
  * @returns html code of navigation bar
  */
 function NavBar() {
@@ -73,11 +73,11 @@ function NavBar() {
                 }}
                 to="/"
               >
-                <div className="btn btn-outline-primary">Log out</div>
+                <div className="btn btn-outline-info text-dark">Log out</div>
               </Nav.Link>
             ) : (
               <Nav.Link eventKey={4} as={Link} className="mx-2" to="/login">
-                <div className="btn btn-outline-primary">Login</div>
+                <div className="btn btn-outline-info text-dark">Login</div>
               </Nav.Link>
             )}
           </Nav>

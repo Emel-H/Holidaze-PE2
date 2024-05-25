@@ -11,29 +11,29 @@ const loginurl = "https://v2.api.noroff.dev/auth/login?_holidaze=true";
  * @param {function} navigate function to allow navigation from login page upon login success
  * @param {function} setError function to set error string upon login faliure
  */
-async function loginUser(event, addUser, navigate, setError){
-    setError("");
-    const email = event.target[0].value;
-    const password = event.target[1].value;
+async function loginUser(event, addUser, navigate, setError) {
+  setError("");
+  const email = event.target[0].value;
+  const password = event.target[1].value;
 
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    };
-    const response = await fetch(loginurl, requestOptions);
-    const json = await response.json();
-    if (response.ok) {
-      addUser(json.data);
-      navigate("../profile/" + json.data.name);
-    } else {
-      setError(json.errors[0].message);
-    }
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+  };
+  const response = await fetch(loginurl, requestOptions);
+  const json = await response.json();
+  if (response.ok) {
+    addUser(json.data);
+    navigate("../profile/" + json.data.name);
+  } else {
+    setError(json.errors[0].message);
+  }
 }
 
 /**

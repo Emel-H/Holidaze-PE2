@@ -25,7 +25,7 @@ const profileUrl = "https://v2.api.noroff.dev/holidaze/profiles/";
  * @param {function} setImage callback function to set the image value
  * @param {function} setUserVenues callback function to set the list of venues belonging to the profile
  * @param {function} setUserBookings callback function to set the list of bookings belonging to the profile
- * @param {function} setName callback function to set the name of the profile 
+ * @param {function} setName callback function to set the name of the profile
  * @returns html code
  */
 function GetProfile(
@@ -96,7 +96,7 @@ function GetProfile(
   } else {
     return (
       <Container className="mt-5 pt-5">
-        <Row className="text-dark bg-white border rounded mx-1 px-1">
+        <Row className="text-dark bg-accent border rounded mx-1 px-1">
           <Col md={4}>
             <div className="ratio ratio-1x1">
               <Image
@@ -133,13 +133,13 @@ function GetProfile(
 }
 
 /**
- * 
+ *
  * @param {Array} venues a list of venues to populate in the html code
  * @param {String} name name of the user from the profile
  * @param {String} username name of the logged in user retrieved from storage
  * @param {boolean} venueManager a boolean to state if the loggen in user is a venue manager or not
  * @param {function} DeleteVenue a callback function to delete a venue
- * @returns 
+ * @returns
  */
 function GetVenues(venues, name, username, venueManager, DeleteVenue) {
   let accordionBodyItems = "";
@@ -170,14 +170,14 @@ function GetVenues(venues, name, username, venueManager, DeleteVenue) {
             </p>
             {name === username && venueManager ? (
               <Link
-                className="btn btn-dark mt-1 mb-1"
+                className="btn btn-info mt-1 mb-1"
                 to={`/venue/${venue.id}`}
               >
                 View Bookings
               </Link>
             ) : (
               <Link
-                className="btn btn-dark mt-1 mb-1"
+                className="btn btn-info mt-1 mb-1"
                 to={`/venue/${venue.id}`}
               >
                 View
@@ -185,7 +185,7 @@ function GetVenues(venues, name, username, venueManager, DeleteVenue) {
             )}
             {name === username && venueManager ? (
               <Link
-                className="btn btn-success mt-1 mb-1 mx-1"
+                className="btn btn-info mt-1 mb-1 mx-1"
                 to={`/addeditvenue/${venue.id}`}
               >
                 Edit
@@ -225,7 +225,7 @@ function GetVenues(venues, name, username, venueManager, DeleteVenue) {
 /**
  * function that sets the html content of the my bookings section
  * @param {Array} bookings list of bookings to populate in the html code
- * @param {function} DeleteBooking a callback function to be able to delete a booking 
+ * @param {function} DeleteBooking a callback function to be able to delete a booking
  * @returns html code
  */
 function GetBookings(bookings, DeleteBooking) {
@@ -257,7 +257,7 @@ function GetBookings(bookings, DeleteBooking) {
               {new Date(booking.dateTo).toLocaleDateString()}
             </p>
             <Link
-              className="btn btn-dark mt-1 mb-1 mx-1"
+              className="btn btn-info mt-1 mb-1 mx-1"
               to={`/venue/${booking.venue.id}`}
             >
               View
@@ -307,7 +307,11 @@ function GetChangeAvatar(UpdateAvatar) {
                 aria-label="avatar"
                 aria-required
               />
-              <button type="submit" id="SubmitButton" className="btn btn-success">
+              <button
+                type="submit"
+                id="SubmitButton"
+                className="btn btn-info"
+              >
                 Update
               </button>
             </Stack>
@@ -319,7 +323,7 @@ function GetChangeAvatar(UpdateAvatar) {
 }
 
 /**
- * function to update users profile image using noroff api 
+ * function to update users profile image using noroff api
  * @param {Event} event the submission event that contains the new image URL
  * @param {*} token user token to use for the api call
  * @param {*} key api key to use for api call
@@ -505,7 +509,7 @@ function Profile() {
           <Container className="mt-2">
             {venueManager && name === username ? (
               <Link
-                className="btn btn-success my-2 mx-1 float-end"
+                className="btn btn-info my-2 mx-1 float-end"
                 to={`/addeditvenue/new`}
               >
                 Create New Venue

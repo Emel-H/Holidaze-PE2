@@ -108,7 +108,7 @@ function CreateNewVenue(CreateVenue, error) {
  * @param {Number} maxGuests the venue mac guests as placeholder for edits
  * @param {function} UpdateVenue a callback function to update the venue info
  * @param {String} error a string containing any error messages generated
- * @returns html code 
+ * @returns html code
  */
 function UpdateExistingVenue(
   name,
@@ -366,7 +366,7 @@ function GetVenueInfo(
 
 /**
  * function that generates the creation or editing components of a venue
- * @returns html code 
+ * @returns html code
  */
 function AddEditVenue() {
   const params = useParams();
