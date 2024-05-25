@@ -11,7 +11,8 @@ import Venue from "./pages/venue";
 import AddEditVenue from "./pages/addeditvenue";
 import Guide from "./pages/guide";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./custom.scss";
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 /**
  * a function that decides the layout of the html pages in the react app
@@ -28,7 +29,7 @@ function Layout() {
 }
 
 /**
- * the main react app code is generated in this function 
+ * the main react app code is generated in this function
  * @returns html code
  */
 function App() {

@@ -20,7 +20,7 @@ const bookingUrl = "https://v2.api.noroff.dev/holidaze/bookings";
 
 /**
  * function to get the venue infrommation from the Noroff API
- * @param {*} id venue identification 
+ * @param {*} id venue identification
  * @param {function} setImages a function to set the venue images
  * @param {function} setOwnerName a function to set the owner name
  * @param {function} setUserBookings a function to set all the user bookings
@@ -56,10 +56,10 @@ function GetVenueInfo(
 
 /**
  * function to book a venue through Noroff API
- * @param {Date} dateFrom the date from 
- * @param {Date} dateTo the date to 
+ * @param {Date} dateFrom the date from
+ * @param {Date} dateTo the date to
  * @param {Number} numberOfGuests the number of guests
- * @param {*} token the user token 
+ * @param {*} token the user token
  * @param {*} key the apps API key
  * @param {*} venueId the id of the venue to book
  * @param {String} username the username of the user
@@ -197,15 +197,15 @@ function GetVenue(venueInfo) {
 }
 
 /**
- * a fuction to return the booking of a venue html form and ties callback function to correct form elements 
+ * a fuction to return the booking of a venue html form and ties callback function to correct form elements
  * @param {Array} userBookings a list of dates booked to disable them in calender
  * @param {boolean} loggedIn boolead to check is user is logged in or not
  * @param {function} CreateBooking callback to create login function
- * @param {function} dateFromChanged callback to change of date from 
- * @param {function} dateToChanged callback to change of date to 
- * @param {function} numGuestsChanged callback to change of number of guests 
+ * @param {function} dateFromChanged callback to change of date from
+ * @param {function} dateToChanged callback to change of date to
+ * @param {function} numGuestsChanged callback to change of number of guests
  * @param {String} error string containing any error messages
- * @returns 
+ * @returns
  */
 function GetBooking(
   userBookings,

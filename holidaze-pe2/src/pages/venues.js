@@ -76,7 +76,7 @@ function GetVenues(search) {
 
 /**
  * a function that generates html code for the veneue catalog based on the search value and teh list of venues
- * @param {Array} venues list of venues 
+ * @param {Array} venues list of venues
  * @param {String} search the value of the search bar
  * @returns html code
  */
@@ -129,7 +129,7 @@ function PopulateVenues(venues, search) {
           <ListGroup.Item> Max guests: {venue.maxGuests} </ListGroup.Item>
           <ListGroup.Item> Price: {venue.price} $ </ListGroup.Item>
         </ListGroup>
-        <Link className="btn btn-dark mt-1 mb-1" to={`/venue/${venue.id}`}>
+        <Link className="btn btn-info mt-1 mb-1" to={`/venue/${venue.id}`}>
           View
         </Link>
       </Card>

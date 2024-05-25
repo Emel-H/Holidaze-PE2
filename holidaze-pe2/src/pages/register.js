@@ -9,45 +9,45 @@ const registerUrl = "https://v2.api.noroff.dev/auth/register";
  * @param {function} setError a way to set an error and communicate with the end user
  * @param {function} setSuccess a way to communicate the success of the registration
  * @param {function} navigate a function to navigate to another page once registration is successful
- * @param {function} delay a function to introduce a delay and communicte the success of the registration to the user 
+ * @param {function} delay a function to introduce a delay and communicte the success of the registration to the user
  */
-async function UserRegister(event, setError,setSuccess, navigate, delay){
-    const name = event.target[0].value;
-    const email = event.target[1].value;
-    const password = event.target[2].value;
-    const avatar = event.target[3].value;
-    const bio = event.target[4].value;
-    const venueManager = event.target[5].checked;
-    setError("");
+async function UserRegister(event, setError, setSuccess, navigate, delay) {
+  const name = event.target[0].value;
+  const email = event.target[1].value;
+  const password = event.target[2].value;
+  const avatar = event.target[3].value;
+  const bio = event.target[4].value;
+  const venueManager = event.target[5].checked;
+  setError("");
 
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      bio: bio,
+      avatar: {
+        url: avatar,
+        alt: "profile avatar image",
       },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        bio: bio,
-        avatar: {
-          url: avatar,
-          alt: "profile avatar image",
-        },
-        venueManager: venueManager,
-        password: password,
-      }),
-    };
-    setSuccess("Submitting Registration");
-    const response = await fetch(registerUrl, requestOptions);
-    const json = await response.json();
-    if (response.ok) {
-      setSuccess("Registration successful, proceeding to login");
-      await delay(2000);
-      navigate("../login");
-    } else {
-      setSuccess("");
-      setError(json.errors[0].message);
-    }
+      venueManager: venueManager,
+      password: password,
+    }),
+  };
+  setSuccess("Submitting Registration");
+  const response = await fetch(registerUrl, requestOptions);
+  const json = await response.json();
+  if (response.ok) {
+    setSuccess("Registration successful, proceeding to login");
+    await delay(2000);
+    navigate("../login");
+  } else {
+    setSuccess("");
+    setError(json.errors[0].message);
+  }
 }
 
 /**
@@ -64,7 +64,7 @@ function Home() {
 
   const RegisterUser = async (event) => {
     event.preventDefault();
-    UserRegister(event, setError,setSuccess, navigate, delay);
+    UserRegister(event, setError, setSuccess, navigate, delay);
   };
 
   return (
