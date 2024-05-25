@@ -2,14 +2,14 @@
 // you can open the bootstrap.scss module and check any available variables.
 $primary: #efb328;
 $success: #10633b;
-$info: #2879A4;
+$info: #2879a4;
 $warning: #b8c924;
 $danger: #d62518;
 $light: #f8f9fa;
 $dark: #343a40;
 
 //custom color to be mapped
-$accent : #f5e0c8;
+$accent: #f5e0c8;
 
 // this is used to map colors. change accordingly.
 $theme-colors: (
@@ -20,10 +20,10 @@ $theme-colors: (
   danger: $danger,
   light: $light,
   dark: $dark,
-// add any additional color below
+  // add any additional color below
   accent: $accent,
-// now bg-accent,btn-accent,etc.. can be called
+  // now bg-accent,btn-accent,etc.. can be called
 );
 
 // Import Bootstrap and its default variables
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";

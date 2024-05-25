@@ -307,11 +307,7 @@ function GetChangeAvatar(UpdateAvatar) {
                 aria-label="avatar"
                 aria-required
               />
-              <button
-                type="submit"
-                id="SubmitButton"
-                className="btn btn-info"
-              >
+              <button type="submit" id="SubmitButton" className="btn btn-info">
                 Update
               </button>
             </Stack>
