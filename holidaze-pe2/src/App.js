@@ -12,7 +12,6 @@ import AddEditVenue from "./pages/addeditvenue";
 import Guide from "./pages/guide";
 import "./App.css";
 import "./custom.scss";
-//import "bootstrap/dist/css/bootstrap.min.css";
 
 /**
  * a function that decides the layout of the html pages in the react app
