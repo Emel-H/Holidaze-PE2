@@ -58,7 +58,8 @@ function CreateNewVenue(CreateVenue, error) {
                 id="image"
               />
               <small id="imagetext" className="form-text text-muted">
-              To add images to your venue, please include the image URLs seperated by ","
+                To add images to your venue, please include the image URLs
+                seperated by ","
               </small>
             </div>
             <div className="form-group my-4 mx-3">
@@ -153,17 +154,17 @@ function UpdateExistingVenue(
   UpdateVenue,
   error,
 ) {
-    let images = "";
-    if(image===undefined||image===""){
-        images=""; 
-    }else{
-        for (let index = 0; index < image.length; index++) {
-            images += image[index].url.toString();
-            if(index+1 < image.length){
-                images += ","
-            }
-        }
+  let images = "";
+  if (image === undefined || image === "") {
+    images = "";
+  } else {
+    for (let index = 0; index < image.length; index++) {
+      images += image[index].url.toString();
+      if (index + 1 < image.length) {
+        images += ",";
+      }
     }
+  }
   return (
     <div className="container">
       <div className="row mb-5">
@@ -211,7 +212,8 @@ function UpdateExistingVenue(
                 defaultValue={images}
               />
               <small id="imagetext" className="form-text text-muted">
-                To add images to your venue, please include the image URLs seperated by ","
+                To add images to your venue, please include the image URLs
+                seperated by ","
               </small>
             </div>
             <div className="form-group my-4 mx-3">
@@ -305,24 +307,22 @@ async function VenueUpdate(
   setError,
 ) {
   event.preventDefault();
-  const name =
-    event.target[0].value;
-  const description =
-    event.target[1].value;
-  const image =
-    event.target[2].value;
-  const price =
-    Number(event.target[3].value);
-  const maxGuests =
-    Number(event.target[4].value);
-    const wifi = event.target[5].checked;
-    const parking = event.target[6].checked;
-    const breakfast = event.target[7].checked;
-    const pets = event.target[8].checked;
+  const name = event.target[0].value;
+  const description = event.target[1].value;
+  const image = event.target[2].value;
+  const price = Number(event.target[3].value);
+  const maxGuests = Number(event.target[4].value);
+  const wifi = event.target[5].checked;
+  const parking = event.target[6].checked;
+  const breakfast = event.target[7].checked;
+  const pets = event.target[8].checked;
 
-  let imagesArray = image.split(',');
+  let imagesArray = image.split(",");
   for (let index = 0; index < imagesArray.length; index++) {
-    imagesArray[index] = {url: imagesArray[index], alt: "venue image"+index.toString()};
+    imagesArray[index] = {
+      url: imagesArray[index],
+      alt: "venue image" + index.toString(),
+    };
   }
   const requestOptions = {
     method: "PUT",
@@ -342,7 +342,7 @@ async function VenueUpdate(
         parking: parking,
         breakfast: breakfast,
         pets: pets,
-      }
+      },
     }),
   };
   const response = await fetch(venueUrl + "/" + id, requestOptions);
@@ -378,9 +378,12 @@ async function VenueCreate(event, token, key, navigate, username, setError) {
   const breakfast = event.target[7].checked;
   const pets = event.target[8].checked;
 
-  let imagesArray = image.split(',');
+  let imagesArray = image.split(",");
   for (let index = 0; index < imagesArray.length; index++) {
-    imagesArray[index] = {url: imagesArray[index], alt: "venue image"+index.toString()};
+    imagesArray[index] = {
+      url: imagesArray[index],
+      alt: "venue image" + index.toString(),
+    };
   }
 
   const requestOptions = {
@@ -401,7 +404,7 @@ async function VenueCreate(event, token, key, navigate, username, setError) {
         parking: parking,
         breakfast: breakfast,
         pets: pets,
-      }
+      },
     }),
   };
   const response = await fetch(venueUrl, requestOptions);
@@ -442,9 +445,7 @@ function GetVenueInfo(
       if (response.ok) {
         setName(json.data.name);
         setDescription(json.data.description);
-        json.data.media.length > 0
-          ? setImage(json.data.media)
-          : setImage("");
+        json.data.media.length > 0 ? setImage(json.data.media) : setImage("");
         setPrice(json.data.price);
         setMaxGuests(json.data.maxGuests);
         setWifi(json.data.meta.wifi);
