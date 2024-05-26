@@ -1,7 +1,7 @@
 # Project Exam 2: Holidaze App
 This project is an implementation as a response to a project exam assignment at Noroff, for front-end development students. A brief of the assignment (from Noroff) describing the web app can be found below.
 
-## Brief
+## Project brief (from Noroff)
 A newly launched accommodation booking site called Holidaze has approached you to develop a brand new front end for their application. While they have a list of required features, the design and user experience has not been specified. Working with the official API documentation, plan, design and build a modern front end accommodation booking application.
 
 There are two aspects to this brief: the customer-facing side of the website where users can book holidays at a venue, and an admin-facing side of the website where users can register and manage venues and bookings at those venues.
@@ -42,7 +42,7 @@ Style guide [Style Guide (pdf)](https://github.com/Emel-H/Holidaze-PE2/blob/main
 This implementation is using the Create React App package. Hence, more details on how to execute can be found in the readme file in the app folder. 
 Here you can also find all the source code and materials [holidaze-pe2](https://github.com/Emel-H/Holidaze-PE2/tree/main/holidaze-pe2)
 
-## key technology choices
+## Key technology choices
 
 JavaScript Framework: React 18.3.1
 
