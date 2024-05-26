@@ -140,7 +140,7 @@ function UpdateExistingVenue(
                 autoComplete="on"
                 id="name"
                 aria-label="name"
-                placeholder={name}
+                defaultValue={name}
               />
             </div>
             <div className="form-group my-4 mx-3">
@@ -150,7 +150,7 @@ function UpdateExistingVenue(
                 className="form-control"
                 autoComplete="on"
                 id="description"
-                placeholder={description}
+                defaultValue={description}
               />
               <small id="descriptiontext" className="form-text text-muted">
                 Add a few words about your venue
@@ -163,7 +163,7 @@ function UpdateExistingVenue(
                 className="form-control"
                 autoComplete="on"
                 id="image"
-                placeholder={image}
+                defaultValue={image}
               />
               <small id="imagetext" className="form-text text-muted">
                 To add an image to your venue, please include the image URL
@@ -176,7 +176,7 @@ function UpdateExistingVenue(
                 className="form-control"
                 autoComplete="on"
                 id="price"
-                placeholder={price}
+                defaultValue={price}
                 aria-label="price"
               />
             </div>
@@ -187,7 +187,7 @@ function UpdateExistingVenue(
                 className="form-control"
                 autoComplete="on"
                 id="guests"
-                placeholder={maxGuests}
+                defaultValue={maxGuests}
                 aria-label="guests"
               />
             </div>
@@ -228,25 +228,15 @@ async function VenueUpdate(
   event.preventDefault();
 
   const name =
-    event.target[0].value.length > 0
-      ? event.target[0].value
-      : event.target[0].placeholder;
+    event.target[0].value;
   const description =
-    event.target[1].value.length > 0
-      ? event.target[1].value
-      : event.target[1].placeholder;
+    event.target[1].value;
   const image =
-    event.target[2].value.length > 0
-      ? event.target[2].value
-      : event.target[2].placeholder;
+    event.target[2].value;
   const price =
-    event.target[3].value.length > 0
-      ? Number(event.target[3].value)
-      : Number(event.target[3].placeholder);
+    Number(event.target[3].value);
   const maxGuests =
-    event.target[4].value.length > 0
-      ? Number(event.target[4].value)
-      : Number(event.target[4].placeholder);
+    Number(event.target[4].value);
 
   const requestOptions = {
     method: "PUT",
