@@ -21,7 +21,12 @@ function NavBar() {
     >
       <Navbar.Brand className="text-dark w-25 text-start">
         <Link className="text-dark text-decoration-none " to="/">
-          <img className="w-25" src={logo} alt="site logo" style={{minWidth:"90px"}} />
+          <img
+            className="w-25"
+            src={logo}
+            alt="site logo"
+            style={{ minWidth: "90px" }}
+          />
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle className="bg-light" aria-controls="basic-navbar-nav" />

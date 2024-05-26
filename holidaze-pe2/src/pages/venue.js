@@ -108,7 +108,7 @@ async function BookingCreate(
 function GetCarosel(images) {
   if (images.length > 0) {
     return images.map((image, index) => (
-      <Carousel.Item key={image.url+index}>
+      <Carousel.Item key={image.url + index}>
         <img
           style={{ maxHeight: "70vh" }}
           className="w-100"
@@ -312,7 +312,11 @@ function GetBooking(
       </Container>
     );
   } else {
-    return <p className="text-center mt-5 text-danger">Please log in to book this venue</p>;
+    return (
+      <p className="text-center mt-5 text-danger">
+        Please log in to book this venue
+      </p>
+    );
   }
 }
 
@@ -324,7 +328,7 @@ function GetBooking(
 function GetVenueBookings(userBookings) {
   if (userBookings.length > 0) {
     const bookings = userBookings.map((booking, index) => (
-      <ListGroupItem key={booking.id+index}>
+      <ListGroupItem key={booking.id + index}>
         <div className="float-start">
           <p>
             <Link
