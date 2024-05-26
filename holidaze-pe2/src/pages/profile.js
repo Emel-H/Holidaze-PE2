@@ -146,8 +146,8 @@ function GetVenues(venues, name, username, venueManager, DeleteVenue) {
   if (typeof venues === "undefined" || venues.length <= 0) {
     accordionBodyItems = <Accordion.Body>No Venues found</Accordion.Body>;
   } else {
-    accordionBodyItems = venues.map((venue) => (
-      <Accordion.Body key={venue.id}>
+    accordionBodyItems = venues.map((venue, index) => (
+      <Accordion.Body key={venue.id+index}>
         <Row className="border rounded">
           <Col md={4}>
             {venue.media.length > 0 ? (
@@ -233,8 +233,8 @@ function GetBookings(bookings, DeleteBooking) {
   if (typeof bookings === "undefined" || bookings.length <= 0) {
     accordionBodyItems = <Accordion.Body>No Bookings found</Accordion.Body>;
   } else {
-    accordionBodyItems = bookings.map((booking) => (
-      <Accordion.Body key={booking.id}>
+    accordionBodyItems = bookings.map((booking, index) => (
+      <Accordion.Body key={booking.id+index}>
         <Row className="border rounded">
           <Col md={4}>
             {booking.venue.media.length > 0 ? (
