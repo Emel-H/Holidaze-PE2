@@ -126,7 +126,7 @@ function UpdateExistingVenue(
         for (let index = 0; index < image.length; index++) {
             images += image[index].url.toString();
             if(index+1 < image.length){
-                images += ", "
+                images += ","
             }
         }
     }
@@ -249,7 +249,7 @@ async function VenueUpdate(
   const maxGuests =
     Number(event.target[4].value);
 
-  let imagesArray = image.split(', ');
+  let imagesArray = image.split(',');
   for (let index = 0; index < imagesArray.length; index++) {
     imagesArray[index] = {url: imagesArray[index], alt: "venue image"+index.toString()};
   }
@@ -297,7 +297,7 @@ async function VenueCreate(event, token, key, navigate, username, setError) {
   const price = Number(event.target[3].value);
   const maxGuests = Number(event.target[4].value);
 
-  let imagesArray = image.split(', ');
+  let imagesArray = image.split(',');
   for (let index = 0; index < imagesArray.length; index++) {
     imagesArray[index] = {url: imagesArray[index], alt: "venue image"+index.toString()};
   }
