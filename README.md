@@ -16,7 +16,7 @@ The API you are using for this project can be found under Holidaze in the [Norof
   <li>A user may view a calendar with available dates for a Venue</li>
   <li>A user with a stud.noroff.no email may register as a customer</li>
   <li>A registered customer may create a booking at a Venue</li>
-  <li>A registered customer may view their upcoming bookings</li>
+  <li>A registered customer may view (and delete) their upcoming bookings</li>
   <li>A user with a stud.noroff.no email may register as a Venue manager</li>
   <li>A registered Venue manager may create a Venue</li>
   <li>A registered Venue manager may update a Venue they manage</li>
@@ -36,12 +36,11 @@ Design Prototype [Figma](https://www.figma.com/design/Y4Ts9uGVxYfsV5yl9hmK6m/Pro
 
 Hosted Demo [Netlify](https://holidaze-pe2-emeljh.netlify.app/)
 
-Style guide [Github](https://github.com/Emel-H/Holidaze-PE2/blob/main/Project%20Exam%202%20Style%20Guide.pdf)
+Style guide [Style Guide (pdf)](https://github.com/Emel-H/Holidaze-PE2/blob/main/Project%20Exam%202%20Style%20Guide.pdf)
 
 ## Executing the code
 This implementation is using the Create React App package. Hence, more details on how to execute can be found in the readme file in the app folder. 
-
-Here you can also find all the source code and materials [Github](https://github.com/Emel-H/Holidaze-PE2/tree/main/holidaze-pe2)
+Here you can also find all the source code and materials [holidaze-pe2](https://github.com/Emel-H/Holidaze-PE2/tree/main/holidaze-pe2)
 
 ## key technology choices
 
@@ -66,7 +65,6 @@ Planning application: GitHub Projects
   <li>"@testing-library/react": "^13.4.0"</li>
   <li>"@testing-library/user-event": "^13.5.0"</li>
    <li>"bootstrap": "^5.3.3"</li>
-  <li>"bootstrap-datepicker": "^1.10.0"</li>
   <li>"dayjs": "^1.11.11"</li>
   <li>"react": "^18.3.1"</li>
   <li>"react-bootstrap": "^2.10.2"</li>
