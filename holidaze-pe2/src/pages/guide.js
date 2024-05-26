@@ -23,11 +23,11 @@ function Guide() {
                 <li key={1}>
                   Fill in all the required information in the form{" "}
                 </li>
-                <li key={1}>
+                <li key={2}>
                   (Optional) check off on venue manager if you want to manage
                   venues
                 </li>
-                <li key={2}>Click register button at the bottom </li>
+                <li key={3}>Click register button at the bottom </li>
               </ol>
             </Accordion.Body>
           </Accordion.Item>

@@ -68,7 +68,7 @@ function GetVenues(search) {
       <Spinner className="my-3" animation="border" role="status"></Spinner>
     );
   } else if (isError) {
-    return <h2>Error loading data from our servers</h2>;
+    return <h2 className="text-danger">Error loading data from our servers, try again later or contact us for support</h2>;
   } else {
     return PopulateVenues(venues, search);
   }
@@ -87,8 +87,8 @@ function PopulateVenues(venues, search) {
       venue.description.toLowerCase().includes(search.toLowerCase()),
   );
   if (pop.length > 0) {
-    return pop.map((venue) => (
-      <Card className=" m-3" style={{ width: "18rem" }} key={venue.id}>
+    return pop.map((venue, index) => (
+      <Card className=" m-3" style={{ width: "18rem" }} key={venue.id+index}>
         <Card.Header>
           {venue.media.length > 0 ? (
             <Card.Img
@@ -127,7 +127,7 @@ function PopulateVenues(venues, search) {
         </Card.Body>
         <ListGroup>
           <ListGroup.Item> Max guests: {venue.maxGuests} </ListGroup.Item>
-          <ListGroup.Item> Price: {venue.price} $ </ListGroup.Item>
+          <ListGroup.Item> Price: {venue.price} $ </ListGroup.Item> 
         </ListGroup>
         <Link className="btn btn-info mt-1 mb-1" to={`/venue/${venue.id}`}>
           View
@@ -136,7 +136,7 @@ function PopulateVenues(venues, search) {
     ));
   } else {
     return (
-      <h3 className="my-3"> No match to your search, try something else. </h3>
+      <h3 className="my-3 text-danger"> No match to your search, try something else. </h3>
     );
   }
 }
