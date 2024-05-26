@@ -83,6 +83,36 @@ function CreateNewVenue(CreateVenue, error) {
                 aria-label="guests"
               />
             </div>
+            <div className="form-group my-4 mx-3">
+              <label htmlFor="wifi">Wifi</label>
+              <input
+                type="checkbox"
+                className="mx-2"
+                id="wifi"
+                aria-label="wifi"
+              />
+              <label htmlFor="parking">Parking</label>
+              <input
+                type="checkbox"
+                className="mx-2"
+                id="parking"
+                aria-label="parking"
+              />
+              <label htmlFor="breakfast">Breakfast</label>
+              <input
+                type="checkbox"
+                className="mx-2"
+                id="breakfast"
+                aria-label="breakfast"
+              />
+              <label htmlFor="pets">Pets</label>
+              <input
+                type="checkbox"
+                className="mx-2"
+                id="pets"
+                aria-label="pets"
+              />
+            </div>
             <p className="text-danger text-center my-3">{error}</p>
             <button
               type="submit"
@@ -116,6 +146,10 @@ function UpdateExistingVenue(
   image,
   price,
   maxGuests,
+  wifi,
+  parking,
+  breakfast,
+  pets,
   UpdateVenue,
   error,
 ) {
@@ -202,6 +236,40 @@ function UpdateExistingVenue(
                 aria-label="guests"
               />
             </div>
+            <div className="form-group my-4 mx-3">
+              <label htmlFor="wifi">Wifi</label>
+              <input
+                type="checkbox"
+                className="mx-2"
+                id="wifi"
+                aria-label="wifi"
+                defaultChecked={wifi}
+              />
+              <label htmlFor="parking">Parking</label>
+              <input
+                type="checkbox"
+                className="mx-2"
+                id="parking"
+                aria-label="parking"
+                defaultChecked={parking}
+              />
+              <label htmlFor="breakfast">Breakfast</label>
+              <input
+                type="checkbox"
+                className="mx-2"
+                id="breakfast"
+                aria-label="breakfast"
+                defaultChecked={breakfast}
+              />
+              <label htmlFor="pets">Pets</label>
+              <input
+                type="checkbox"
+                className="mx-2"
+                id="pets"
+                aria-label="pets"
+                defaultChecked={pets}
+              />
+            </div>
             <p className="text-danger text-center my-3">{error}</p>
             <button
               type="submit"
@@ -237,7 +305,6 @@ async function VenueUpdate(
   setError,
 ) {
   event.preventDefault();
-
   const name =
     event.target[0].value;
   const description =
@@ -248,6 +315,10 @@ async function VenueUpdate(
     Number(event.target[3].value);
   const maxGuests =
     Number(event.target[4].value);
+    const wifi = event.target[5].checked;
+    const parking = event.target[6].checked;
+    const breakfast = event.target[7].checked;
+    const pets = event.target[8].checked;
 
   let imagesArray = image.split(',');
   for (let index = 0; index < imagesArray.length; index++) {
@@ -266,6 +337,12 @@ async function VenueUpdate(
       media: imagesArray,
       price: price,
       maxGuests: maxGuests,
+      meta: {
+        wifi: wifi,
+        parking: parking,
+        breakfast: breakfast,
+        pets: pets,
+      }
     }),
   };
   const response = await fetch(venueUrl + "/" + id, requestOptions);
@@ -296,6 +373,10 @@ async function VenueCreate(event, token, key, navigate, username, setError) {
       : "https://saterdesign.com/cdn/shop/products/property-placeholder_a9ec7710-1f1e-4654-9893-28c34e3b6399_2000x.jpg?v=1500393334";
   const price = Number(event.target[3].value);
   const maxGuests = Number(event.target[4].value);
+  const wifi = event.target[5].checked;
+  const parking = event.target[6].checked;
+  const breakfast = event.target[7].checked;
+  const pets = event.target[8].checked;
 
   let imagesArray = image.split(',');
   for (let index = 0; index < imagesArray.length; index++) {
@@ -315,6 +396,12 @@ async function VenueCreate(event, token, key, navigate, username, setError) {
       media: imagesArray,
       price: price,
       maxGuests: maxGuests,
+      meta: {
+        wifi: wifi,
+        parking: parking,
+        breakfast: breakfast,
+        pets: pets,
+      }
     }),
   };
   const response = await fetch(venueUrl, requestOptions);
@@ -342,6 +429,10 @@ function GetVenueInfo(
   setImage,
   setPrice,
   setMaxGuests,
+  setWifi,
+  setParking,
+  setBreakfast,
+  setPets,
 ) {
   useEffect(() => {
     async function getData() {
@@ -356,6 +447,10 @@ function GetVenueInfo(
           : setImage("");
         setPrice(json.data.price);
         setMaxGuests(json.data.maxGuests);
+        setWifi(json.data.meta.wifi);
+        setParking(json.data.meta.parking);
+        setBreakfast(json.data.meta.breakfast);
+        setPets(json.data.meta.pets);
       } else {
         alert(json.errors[0].message);
       }
@@ -382,6 +477,10 @@ function AddEditVenue() {
   const [image, setImage] = useState();
   const [price, setPrice] = useState();
   const [maxGuests, setMaxGuests] = useState();
+  const [wifi, setWifi] = useState();
+  const [parking, setParking] = useState();
+  const [breakfast, setBreakfast] = useState();
+  const [pets, setPets] = useState();
 
   let addeditvenue = "";
   const UpdateVenue = async (event) => {
@@ -402,6 +501,10 @@ function AddEditVenue() {
         setImage,
         setPrice,
         setMaxGuests,
+        setWifi,
+        setParking,
+        setBreakfast,
+        setPets,
       );
       addeditvenue = UpdateExistingVenue(
         name,
@@ -409,6 +512,10 @@ function AddEditVenue() {
         image,
         price,
         maxGuests,
+        wifi,
+        parking,
+        breakfast,
+        pets,
         UpdateVenue,
         error,
       );
