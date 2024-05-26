@@ -58,7 +58,7 @@ function CreateNewVenue(CreateVenue, error) {
                 id="image"
               />
               <small id="imagetext" className="form-text text-muted">
-                To add an image to your venue, please include the image URL
+              To add images to your venue, please include the image URLs seperated by ","
               </small>
             </div>
             <div className="form-group my-4 mx-3">
@@ -119,6 +119,17 @@ function UpdateExistingVenue(
   UpdateVenue,
   error,
 ) {
+    let images = "";
+    if(image===undefined||image===""){
+        images=""; 
+    }else{
+        for (let index = 0; index < image.length; index++) {
+            images += image[index].url.toString();
+            if(index+1 < image.length){
+                images += ", "
+            }
+        }
+    }
   return (
     <div className="container">
       <div className="row mb-5">
@@ -163,10 +174,10 @@ function UpdateExistingVenue(
                 className="form-control"
                 autoComplete="on"
                 id="image"
-                defaultValue={image}
+                defaultValue={images}
               />
               <small id="imagetext" className="form-text text-muted">
-                To add an image to your venue, please include the image URL
+                To add images to your venue, please include the image URLs seperated by ","
               </small>
             </div>
             <div className="form-group my-4 mx-3">
@@ -238,6 +249,10 @@ async function VenueUpdate(
   const maxGuests =
     Number(event.target[4].value);
 
+  let imagesArray = image.split(', ');
+  for (let index = 0; index < imagesArray.length; index++) {
+    imagesArray[index] = {url: imagesArray[index], alt: "venue image"+index.toString()};
+  }
   const requestOptions = {
     method: "PUT",
     headers: {
@@ -248,12 +263,7 @@ async function VenueUpdate(
     body: JSON.stringify({
       name: name,
       description: description,
-      media: [
-        {
-          url: image,
-          alt: "venue main image",
-        },
-      ],
+      media: imagesArray,
       price: price,
       maxGuests: maxGuests,
     }),
@@ -287,6 +297,11 @@ async function VenueCreate(event, token, key, navigate, username, setError) {
   const price = Number(event.target[3].value);
   const maxGuests = Number(event.target[4].value);
 
+  let imagesArray = image.split(', ');
+  for (let index = 0; index < imagesArray.length; index++) {
+    imagesArray[index] = {url: imagesArray[index], alt: "venue image"+index.toString()};
+  }
+
   const requestOptions = {
     method: "POST",
     headers: {
@@ -297,12 +312,7 @@ async function VenueCreate(event, token, key, navigate, username, setError) {
     body: JSON.stringify({
       name: name,
       description: description,
-      media: [
-        {
-          url: image,
-          alt: "venue main image",
-        },
-      ],
+      media: imagesArray,
       price: price,
       maxGuests: maxGuests,
     }),
@@ -342,7 +352,7 @@ function GetVenueInfo(
         setName(json.data.name);
         setDescription(json.data.description);
         json.data.media.length > 0
-          ? setImage(json.data.media[0].url)
+          ? setImage(json.data.media)
           : setImage("");
         setPrice(json.data.price);
         setMaxGuests(json.data.maxGuests);
