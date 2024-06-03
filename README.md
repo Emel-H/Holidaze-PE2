@@ -1,81 +1,92 @@
 # Project Exam 2: Holidaze App
-This project is an implementation as a response to a project exam assignment at Noroff, for front-end development students. A brief of the assignment (from Noroff) describing the web app can be found below.
 
-## Project brief (from Noroff)
-A newly launched accommodation booking site called Holidaze has approached you to develop a brand new front end for their application. While they have a list of required features, the design and user experience has not been specified. Working with the official API documentation, plan, design and build a modern front end accommodation booking application.
+![image](https://github.com/Emel-H/React-Assignment/assets/114482435/8eceef94-89ec-4bdd-93df-5fc7cd887604)
 
-There are two aspects to this brief: the customer-facing side of the website where users can book holidays at a venue, and an admin-facing side of the website where users can register and manage venues and bookings at those venues.
+This project is an implementation response to a project exam assignment at Noroff, for front-end development students. A brief of the assignment (from Noroff) describing the web app can be found below.
 
-The API you are using for this project can be found under Holidaze in the [Noroff API documentation](https://docs.noroff.dev/docs/v2/holidaze/bookings)
+## Description
 
-## User Stories addressed in the implementation
-<ol>
-  <li>A user may view a list of Venues</li>
-  <li>A user may search for a specific Venue</li>
-  <li>A user may view a specific Venue page by id</li>
-  <li>A user may view a calendar with available dates for a Venue</li>
-  <li>A user with a stud.noroff.no email may register as a customer</li>
-  <li>A registered customer may create a booking at a Venue</li>
-  <li>A registered customer may view (and delete) their upcoming bookings</li>
-  <li>A user with a stud.noroff.no email may register as a Venue manager</li>
-  <li>A registered Venue manager may create a Venue</li>
-  <li>A registered Venue manager may update a Venue they manage</li>
-  <li>A registered Venue manager may delete a Venue they manage</li>
-  <li>A registered Venue manager may view bookings for a Venue they manage</li>
-  <li>A registered user may login</li>
-  <li>A registered user may update their avatar</li>
-  <li>A registered user may logout</li>
-</ol>
+This is an accommodation booking site called Holidaze. I have worked with the official API documentation, and planned, designed, and built a modern front-end accommodation booking application.
 
-## Relevant links
-Project planning [Kanban](https://github.com/users/Emel-H/projects/4/views/1)
+There are two aspects to this application: the customer-facing side of the website where users can book holidays at a venue, and the admin-facing side of the website where users can register and manage venues and bookings at those venues.
 
-Project planning [Gantt](https://github.com/users/Emel-H/projects/4/views/4)
+The website has the following pages:
 
-Design Prototype [Figma](https://www.figma.com/design/Y4Ts9uGVxYfsV5yl9hmK6m/Project-exam-2?node-id=1%3A3&t=ClV8EX03jcLQH6uB-1)
+- A registered user may log in & logout
+- A registered user may update their avatar
+- A user may view a list of Venues
+- A user may search for a specific Venue
+- A user may view a specific Venue page by id
+- A user may view a calendar with available dates for a Venue
+- A user with a stud.noroff.no email may register as a customer
+- A registered customer may create a booking at a Venue
+- A registered customer may view (and delete) their upcoming bookings
+- A user with a stud.noroff.no email may register as a Venue manager
+- A registered Venue manager may create a Venue</li>
+- A registered Venue manager may update&delete a Venue they manage
+- A registered Venue manager may view bookings for a Venue they manage
 
-Hosted Demo [Netlify](https://holidaze-pe2-emeljh.netlify.app/)
+## Built With
 
-Style guide [Style Guide (pdf)](https://github.com/Emel-H/Holidaze-PE2/blob/main/Project%20Exam%202%20Style%20Guide.pdf)
+This is a list of the tech stack I have used on assignment:
 
-## Executing the code
-This implementation is using the Create React App package. Hence, more details on how to execute can be found in the readme file in the app folder. 
-Here you can also find all the source code and materials [holidaze-pe2](https://github.com/Emel-H/Holidaze-PE2/tree/main/holidaze-pe2)
+- [React.js](https://reactjs.org/)
+- [Bootstrap](https://getbootstrap.com)
+- [React-bootstrap](https://react-bootstrap.netlify.app/)
+- [React-hook-form](https://react-hook-form.com/)
+- [Styled-components](https://styled-components.com/)
+- [Yup](https://github.com/jquense/yup)
+- [Zustand](https://github.com/pmndrs/zustand)
+- [MUI](https://mui.com/)
+- [Netfly](https://www.netlify.com/)
 
-## Key technology choices
+## Getting Started
 
-JavaScript Framework: React 18.3.1
+### Installing
 
-CSS Framework: Bootstrap 5.3.3, MUI 5.15.18
+This is where you list how to get the project started. It typically just includes telling a person to clone the repo and then install the dependencies e.g.
 
-Hosting services: Netlify
+1. Clone the repo:
 
-Design Application: Figma
+```bash
+git clone git@github.com/Emel-H/Holidaze-PE2
 
-Planning application: GitHub Projects
+```
 
-## Dependencies
-<ul>
-  <li>"@emotion/react": "^11.11.4"</li>
-  <li>"@emotion/styled": "^11.11.5"</li>
-  <li>"@mui/material": "^5.15.18"</li>
-  <li>"@mui/styled-engine-sc": "^6.0.0-alpha.18"</li>
-   <li>"@mui/x-date-pickers": "^7.5.0"</li>
-  <li>"@testing-library/jest-dom": "^5.17.0"</li>
-  <li>"@testing-library/react": "^13.4.0"</li>
-  <li>"@testing-library/user-event": "^13.5.0"</li>
-   <li>"bootstrap": "^5.3.3"</li>
-  <li>"dayjs": "^1.11.11"</li>
-  <li>"react": "^18.3.1"</li>
-  <li>"react-bootstrap": "^2.10.2"</li>
-  <li>"react-dom": "^18.3.1"</li>
-  <li>"react-router-dom": "^6.23.1"</li>
-  <li>"react-scripts": "5.0.1"</li>
-  <li>"sass": "^1.77.2"</li>
-  <li>"styled-components": "^6.1.11"</li>
-   <li>"web-vitals": "^2.1.4"</li>
-  <li>"zustand": "^4.5.2"</li>
-</ul>
+2. Install the dependencies:
+
+```
+npm run build
+```
+
+### Running
+
+Here is where you detail how to run the app. It typically involves the commands you'd need to run to start the project e.g.
+
+To run the app, run the following commands:
+
+```bash
+npm run start
+```
+
+## Contributing
+
+For anyone who wants to contribute, submit a pull request with your suggested changes and I will review and approve the submission. 
+
+## Contact
+
+This is where you can leave your social links for people to contact you, such as a LinkedIn profile or Twitter link e.g.
+
+[My Twitter page](www.twitter.com)
+
+[My LinkedIn page](www.linkedin.com)
+
+## Contact
+
+I can be contacted at my LinkedIn profile.
+
+[My LinkedIn page](https://www.linkedin.com/in/emel-j-h-415905169/)
+
 
 
 
