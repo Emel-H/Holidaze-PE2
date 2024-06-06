@@ -56,7 +56,7 @@ git clone git@github.com/Emel-H/Holidaze-PE2
 2. Install the dependencies:
 
 ```
-npm run install
+npm install
 ```
 
 ### Running
